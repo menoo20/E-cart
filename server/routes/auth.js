@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
+var jwt = require('jsonwebtoken');
+
 
 router.post("/register", async (req,res)=>{
     const newUser = new User({
@@ -39,8 +41,16 @@ router.post('/login', async(req, res) => {
         } 
         else { 
             if (user.validPassword(req.body.password)) { 
+                const accessToken = jwt.sign({
+                    id: user._id,
+                    isAdmin: user.isAdmin
+                }, 
+                process.env.USER_TOKEN_SECRET,
+                {expiresIn: "3d"}
+                )
                 return res.status(201).send({ 
-                    message : "User Logged In Successfully", 
+                    ...user._doc,
+                    accessToken
                 }) 
             } 
             else { 
@@ -49,7 +59,7 @@ router.post('/login', async(req, res) => {
                 }); 
             } 
         } 
-    }); 
+    }).clone(); 
 }); 
 
 
