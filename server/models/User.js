@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 var crypto = require('crypto');
-const res = require("express/lib/response");
 
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true, unique: true},

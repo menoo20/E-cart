@@ -2,12 +2,11 @@ const router = require("express").Router();
 const User = require("../models/User");
 var jwt = require('jsonwebtoken');
 
-
 router.post("/register", async (req,res)=>{
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        salt: req.body.password
     });
 
     // Call setPassword function to hash password 
@@ -48,8 +47,9 @@ router.post('/login', async(req, res) => {
                 process.env.USER_TOKEN_SECRET,
                 {expiresIn: "3d"}
                 )
+                const {hash, salt, ...others} = user._doc;
                 return res.status(201).send({ 
-                    ...user._doc,
+                    ...others,
                     accessToken
                 }) 
             } 
