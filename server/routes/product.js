@@ -3,16 +3,7 @@ const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/a
 const Product = require("../models/Product");
 
 router.post("/", verifyTokenAndAdmin, async(req, res)=>{
-    const {title,desc,img,categories,size,color,price} = req.body;
-    const newProduct = await new Product({
-        title,
-        desc,
-        img,
-        categories,
-        size,
-        color,
-        price
-    })
+    const newProduct = await new Product(req.body)
  
     try{
        await newProduct.save((err, product)=>{
@@ -32,35 +23,35 @@ router.post("/", verifyTokenAndAdmin, async(req, res)=>{
 
 
 router.put("/:id", verifyTokenAndAdmin, async (req, res)=>{
-    const updatedProduct  = await Product.findByIdAndUpdate(req.params.id,{
+  Product.findByIdAndUpdate(req.params.id,
+        {
         $set: req.body,
-    }, {new: true})
-
-    try{
-        
-                res.status(200).json(updatedProduct)
-       }catch(err){
-
-        res.status(500).json(err)
     }
+    , {new: true}).then((docs)=>{
+        if(docs){
+            res.status(200).json(docs)
+        }else{
+            res.status(500).json("something went wrong")
+        }
+    })
 })
 
-router.delete("/:id", verifyTokenAndAuthorize, async(req, res)=>{
+router.delete("/:id", verifyTokenAndAdmin, async(req, res)=>{
     const id = req.params.id;
     try{
-        await User.findByIdAndRemove(id)
-        res.status(200).json("user has been deleted");
+        await Product.findByIdAndRemove(id)
+        res.status(200).json("product has been deleted");
     }catch(err){
         res.json("something wrond happend")
     }
 
 })
 
-router.get("/find/:id", verifyTokenAndAdmin, async(req, res)=>{
+router.get("/find/:id", async(req, res)=>{
     const id = req.params.id;
     try{
-        const user = await User.findById(id)
-        const {hash, salt, ...others} = user._doc;
+        const product = await Product.findById(id)
+        const {hash, salt, ...others} = product._doc;
         return res.status(201).json({
             ...others,
         }) 
@@ -69,44 +60,26 @@ router.get("/find/:id", verifyTokenAndAdmin, async(req, res)=>{
     }
 })
 
-router.get("/", verifyTokenAndAdmin, async(req, res)=>{
+router.get("/", async(req, res)=>{
     try{
-        const recentUsers = req.query.new
-        const users = recentUsers? await User.find().sort({_id: -1}).limit(2): await User.find()
-        return res.status(201).json(users) 
+        const recentProducts = req.query.new
+        const qCategory = req.query.category;
+        let products;
+        if(recentProducts){
+             products = await Product.find().sort({createdAt: -1}).limit(5)
+        }else if(qCategory){
+             products = await Product.find({categories: {$in: [qCategory]}})
+        }else{
+          products = await Product.find();
+        }
+        res.status(200).json(products)
     }catch(err){
         res.json("something wrond happend")
     }
 
 });
 
-router.get("/stats", verifyTokenAndAdmin, async(req, res)=>{
-    const date = new Date;
-    const lastYear = new Date(date.setFullYear(date.getFullYear() -1 )) ;
-    try{
-       const userStats = await User.aggregate([
-           {$match: {createdAt: { $gte: lastYear}}},
-           {
-               $project: {
-                   month: {$month: "$createdAt"},
-                   year: {$year: "$createdAt"},
-                   username : "$username"
-               }
-           },
-           {
-               $group: {
-                   _id: "$month",
-                   total: {$sum: 1},
-                
 
-               }
-           }
-       ])
-       res.status(200).json(userStats);
-    }catch(err){
-        res.status(500).json(err);
-    }
-})
 
 
 module.exports = router
