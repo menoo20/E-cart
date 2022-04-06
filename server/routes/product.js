@@ -51,10 +51,7 @@ router.get("/find/:id", async(req, res)=>{
     const id = req.params.id;
     try{
         const product = await Product.findById(id)
-        const {hash, salt, ...others} = product._doc;
-        return res.status(201).json({
-            ...others,
-        }) 
+        return res.status(201).json(product) 
     }catch(err){
         res.json("something wrond happend")
     }
