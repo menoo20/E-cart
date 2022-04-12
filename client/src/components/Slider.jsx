@@ -1,117 +1,39 @@
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  overflow: hidden;
+const Wrapper = styled.div`
+ height: 50vh;
+ overflow-y: hidden;
 `
 
-const
-
-Arrow = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #fff7f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom:0;
-  right: ${ ({direction})=> direction=== "right" && "10px"};
-  left: ${ ({direction})=> direction=== "left" && "10px"};
-  margin: auto;
-  opacity: 0.5;
-  cursor: pointer;
-`,
- Wrapper = styled.div`
- height: 100%;
- display: flex;
- `,
- Slide = styled.div`
- display: flex;
- height: 100vh;
- width: 100vw;
- align-items: center;
- background-color: #${props=> props.bg}`,
-
- Img = styled.img`
-  height: 80%;
-  margin-left: 80px;
- `,
-
- ImgContainer = styled.div`
- flex: 1;
- height: 100%
- `,
- InfoContainer = styled.div`
- flex: 1;
- padding: 50px`,
-
-Title = styled.h1`
- font-size: 70px;
-`,
-Desc = styled.p`
- margin: 50px 0px;
- font-size: 20px;
- font-weight: 500;
- letter-spacing: 3px
-`,
-Button = styled.button`
- padding: 10px;
- font-size: 20px;
- background: transparent;
- cursor: pointer;
+const CarouselIndicators = styled.div`
+ top: 45vh;
+ bottom: 0;
 `
-
 
 const Slider = () => {
   return (
-    <Container>
-        <Arrow direction="left">
-          <ArrowLeftOutlined />
-        </Arrow>
-        <Wrapper>
-         <Slide bg="faf5fd">
-            <ImgContainer>
-             <Img src="https://thumbs.dreamstime.com/b/indian-man-ethnic-wear-shopping-bags-isolated-over-white-background-128551770.jpg" />
-            </ImgContainer>
-            <InfoContainer>
-               <Title>Summer Sale</Title>
-               <Desc>Don't Compromise On Style! Get Flat 30% OFF For New Arrivals</Desc>
-               <Button>Shop Now</Button>
-            </InfoContainer>
-         </Slide>
-         <Slide bg="fcf1ed">
-            <ImgContainer>
-             <Img src="https://thumbs.dreamstime.com/b/indian-man-ethnic-wear-shopping-bags-isolated-over-white-background-128551770.jpg" />
-            </ImgContainer>
-            <InfoContainer>
-               <Title>Winter Sale</Title>
-               <Desc>Don't Compromise On Style! Get Flat 30% OFF For New Arrivals</Desc>
-               <Button>Shop Now</Button>
-            </InfoContainer>
-         </Slide>
-         <Slide bg="fbf0f4">
-            <ImgContainer>
-             <Img src="https://thumbs.dreamstime.com/b/indian-man-ethnic-wear-shopping-bags-isolated-over-white-background-128551770.jpg" />
-            </ImgContainer>
-            <InfoContainer>
-               <Title>Winter Sale</Title>
-               <Desc>Don't Compromise On Style! Get Flat 30% OFF For New Arrivals</Desc>
-               <Button>Shop Now</Button>
-            </InfoContainer>
-         </Slide>
-         </Wrapper>
-        <Arrow direction="right">
-          <ArrowRightOutlined />
-        </Arrow>
-    </Container>
+  <Wrapper>
+<div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+  <CarouselIndicators className="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </CarouselIndicators>
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+    <img src="https://m.media-amazon.com/images/I/71jxq4iGLNL._SX3000_.jpg" className="d-block w-100" alt="..."></img>
+    </div>
+    <div className="carousel-item">
+    <img src="https://m.media-amazon.com/images/I/61Kadf2nvsL._SX3000_.jpg" className="d-block w-100" alt="..."></img>
+    </div>
+    <div className="carousel-item">
+    <img src="https://m.media-amazon.com/images/I/71RK7p+lPjL._SX3000_.jpg" className="d-block w-100" alt="..."></img>
+    </div>
+  </div>
+</div>
+  </Wrapper>
   )
 }
 
 export default Slider
+
