@@ -7,20 +7,26 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
-
+const paymentRoute = require("./routes/payment");
 dotenv.config();
+const cors = require("cors");
+
+
  
 mongoose.connect(process.env.MONGO_URL)
 .then(_=> console.log("connection successful"))
 .catch(err=> console.log("database connection fail"))
 
 
-app.use(express.json()); 
+
+app.use(express.json());
+app.use(cors()) 
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/order", orderRoute)
+app.use("/api/pay", paymentRoute)
 
 
 

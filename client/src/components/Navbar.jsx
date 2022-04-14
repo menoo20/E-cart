@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from '@material-ui/icons/Search'; 
-import Badge from '@material-ui/core/Badge';
-import MailIcon from '@material-ui/icons/Mail';
-
 
 
 
@@ -81,9 +77,7 @@ const Navbar = () => {
               <MenuItem>Register</MenuItem>
               <MenuItem>Sign In</MenuItem>
               <MenuItem>
-                <Badge badgeContent={4} color="primary">
-                  <MailIcon />
-                </Badge>
+                
               </MenuItem>
             </Right>
         </Wrapper>
