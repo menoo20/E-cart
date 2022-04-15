@@ -25,7 +25,7 @@ const Center = styled.div`
 `
 
 const Logo = styled.h1`
- font-size: 28px;
+ font-size: 31px;
  font-weight: bold;
 `
 
