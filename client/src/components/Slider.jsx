@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
- height: 50vh;
+ height: 60vh;
  overflow-y: hidden;
 `
 
 const CarouselIndicators = styled.div`
- top: 45vh;
+ top: 55vh;
  bottom: 0;
 `
 
