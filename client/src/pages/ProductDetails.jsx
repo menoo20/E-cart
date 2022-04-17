@@ -1,13 +1,17 @@
 import React from 'react'
 import BreadCrumb from '../components/BreadCrumb'
 import Product from '../components/Product'
-const ProductDetails = () => {
+import vegImg from "../images/vegShop.jpg";
+
+
+ const ProductDetails = () => {
+
   return (
-    <div>
-        <BreadCrumb/>
+    <React.Fragment>
+        <BreadCrumb img={vegImg} cat={"Vegetable’s"} catDesc={"Best and Freshest Vegs between Your Hand"}/>
         <Product/>
-    </div>
+    </React.Fragment>
   )
 }
 
-export default ProductDetails
+export default ProductDetails;

@@ -1,16 +1,16 @@
 import React from 'react'
 import "../style/BreadCrumb.scss"
 
-
-const BreadCrumb = () => {
+const BreadCrumb = ({img, cat, catDesc}) => {
   return (
     <section className="breadcrumb-section set-bg">
+        <div className="bg-layout"><img src={img} alt="" /></div>
         <div className="container">
             <div className="row">
                 <div className="col-lg-12 text-center">
                     <div className="breadcrumb__text">
-                        <h1>Vegetable’s <span>Package</span></h1>
-                        <p>Best and Freshest Vegs between Your Hand</p>
+                        <h1>{cat} <span>{cat==="All"? "Categories": "Category"}</span></h1>
+                        <p>{catDesc}</p>
                     </div>
                 </div>
             </div>

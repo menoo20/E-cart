@@ -14,7 +14,7 @@ const Home = () => {
       <div className="container-lg p-0 overflow-hidden">
         <ShopNow/>
         <CategoriesPromoGrid/>
-        <ProductsList/>
+        <ProductsList name={"Featured Products"}/>
         <AdsBanner/>
       </div>
     </div>
