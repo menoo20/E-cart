@@ -28,7 +28,7 @@ const ProductCard = ({img, price, name, quantity}) => {
   const addItem = clicked? "clicked": "";
   return (
     <div className="col-md-4 col-lg-3 ">
-      <div className="card p-4">
+      <div className="card p-4 pb-2">
           <div className="text-center"> <img src={img} width="200"></img> </div>
           <div className="product-details"> <span className="font-weight-bold d-block">$ {price}</span> <span>{name}</span>
               <div className="buttons d-flex flex-row">

@@ -4,14 +4,15 @@ import ProductCard from './ProductCard'
 
 
 
-const CategoriesList = (props) => {
+const ProductsList = ({name}) => {
 
     return (
         <div class="wrapper mb-5">
             <h1 className='py-4 text-center  cat-title'>
-               Featured Products
+               {name}
             </h1>
             <div class="row g-1 justify-content-between">
+
                 <ProductCard 
                   name="Red Redish"
                   price={"7.00"}
@@ -57,22 +58,5 @@ const CategoriesList = (props) => {
   )
 }
 
-export default CategoriesList
+export default ProductsList
 
-
-// const cartButtons = document.querySelectorAll('.cart-button');
-
-// cartButtons.forEach(button => {
-
-// button.addEventListener('click',cartClick);
-
-// });
-
-// function cartClick(){
-// let button =this;
-// button.classList.add('clicked');
-// }
-
-
-
-// });

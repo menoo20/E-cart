@@ -4,6 +4,7 @@ import Announcement from "./components/Announcement";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Footer from "./components/Footer";
+import PGallery from "./pages/PGallery";
 
 const App = () => {
   return(
@@ -15,7 +16,8 @@ const App = () => {
     <Announcement/>
     <Navbar/>
     {/* <Home/> */}
-    <ProductDetails/>
+    <PGallery/>
+    {/* <ProductDetails/> */}
     <Footer/>
     </React.Fragment>
   )

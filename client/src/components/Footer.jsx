@@ -22,7 +22,7 @@ display: none;
 const Footer = () => {
   return (
     <footer className="footer spad">
-        <div className="container px-0">
+        <div className="container px-0 text-center text-sm-start">
             <div className="row">
                 <div className="col-lg-3 col-md-6 col-sm-6">
                     <div className="footer__about">
