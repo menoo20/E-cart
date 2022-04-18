@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Footer from "./components/Footer";
 import PGallery from "./pages/PGallery";
+import Login from "./pages/Login";
 
 const App = () => {
   return(
@@ -13,10 +14,11 @@ const App = () => {
     <div id="preloder">
         <div className="loader"></div>
     </div>
-    <Announcement/>
+    {/* <Announcement/> */}
     <Navbar/>
     {/* <Home/> */}
-    <PGallery/>
+    {/* <PGallery/> */}
+    <Login/>
     {/* <ProductDetails/> */}
     <Footer/>
     </React.Fragment>
