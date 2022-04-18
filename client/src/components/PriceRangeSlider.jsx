@@ -19,7 +19,7 @@ const marks = [
 
 
 const PriceRangeSlider = () => {
-    const [value, setValue] = React.useState([0, 237]);
+    const [value, setValue] = React.useState([0, 500]);
     function valuetext(value) {
         return `${value}$`;
       }
