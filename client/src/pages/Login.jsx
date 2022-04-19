@@ -12,18 +12,18 @@ const Login = () => {
     return (
     <div class="limiter ">
 		<div class="container-login100 py-5">
-			<div class="wrap-login100">
+			<div class="wrap-login100 align-items-center justify-content-between">
 				<div class="login100-pic " >
 					<img src={Avatar} alt="IMG"></img>
 				</div>
 
-				<form class="login100-form " onSubmit={handleSubmit(onSubmit)}>
+				<form class="login100-form " onSubmit={handleSubmit(onSubmit)} >
 					<span class="login100-form-title">
 						Member Login
 					</span>
 
 					<div class="wrap-input100 " >
-						<input {...register("email")} class="input100" type="text"  placeholder="Email"></input>
+						<input {...register("email")} class="input100" type="text"  placeholder="Email" autocomplete="new-password"></input>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="bi bi-envelope-fill" aria-hidden="true"></i>
@@ -61,7 +61,7 @@ const Login = () => {
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
+					<div class="text-center p-t-70">
 						<a class="txt2" href="#">
 							Create your Account
 							<i class="bi bi-arrow-right ms-3" aria-hidden="true"></i>
