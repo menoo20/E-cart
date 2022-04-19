@@ -1,0 +1,88 @@
+
+
+  @keyframes open {
+    0%  {background-position: 166% -25%, 220% -69%;}
+    100%{background-position: 120% -5%, 200% -40%;}
+  }
+
+  .limiter{
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+      
+      .field{
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        }
+      input[type="file"] {
+        display: none;
+      }
+      
+      .custom-file-upload {
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        padding: 6px;
+        cursor: pointer;
+        background: linear-gradient(270deg, #8bd122, #8bd122);
+        margin-bottom: 25px;
+      }
+      
+      .img-wrap{
+        position: relative;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 50%;
+        // background-color: white;
+      }
+      .img-upload:before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url("https://www.pinclipart.com/picdir/big/457-4576008_app-clip-vector-icon-png-download.png");
+        background-size: 30%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: .5s ease;
+      }
+      .img-upload:hover:before{
+       opacity: 1;
+      }
+      img {
+        width: auto;
+        height: 100%;
+      }
+      
+      label{
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #676767;
+      }
+      
+      input{
+        border-radius: 15px;
+        border: 1px solid #b7b7b7;
+        padding: 5px 5px 5px 10px;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+      input:focus{
+        outline: none;
+        border: 1px solid #64d488;
+      }
+      input::placeholder{
+        color: #bebebe;
+      }
+  }
+  
+}

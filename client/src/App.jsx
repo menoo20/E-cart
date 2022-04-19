@@ -6,6 +6,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Footer from "./components/Footer";
 import PGallery from "./pages/PGallery";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   return(
@@ -18,7 +19,8 @@ const App = () => {
     <Navbar/>
     {/* <Home/> */}
     {/* <PGallery/> */}
-    <Login/>
+    {/* <Login/> */}
+    <Register/>
     {/* <ProductDetails/> */}
     <Footer/>
     </React.Fragment>
