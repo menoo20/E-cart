@@ -1,0 +1,78 @@
+
+$green: #8bd122;
+$Pale-green: rgba(#8bd122, 0.1);
+
+// ### Neutral
+
+$Very-vark-blue: #1d2025;
+$Dark-grayish-blue: #68707d;
+$Grayish-blue: #b6bcc8;
+$Light-grayish-blue: #f7f8fd;
+$White: hsl(0, 0%, 100%);
+$Black:hsl(0, 0%, 0%);
+$lightbox-black: rgba(0,0,0,.75);
+$badge-font-size:.55em;
+$badge-padding-y:.37em;
+$badge-padding-x:.66em;
+
+
+.cart{
+
+    .quant{
+        background-color: $green;
+        border-radius:10px;
+        padding: .4rem !important;
+    
+        p{
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            line-height: 0;
+            color: white;
+        }
+        
+        i{
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+    
+            &:hover{
+            color: black;
+            transition: all 0.2s ease-in-out;
+        }
+         
+        }
+    
+    }
+
+    .delete{
+      color: black;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover{
+          color: red;
+      }
+    }
+
+    .priceitem{
+        span{
+            color: rgb(110, 223, 17);
+            font-weight: bolder;
+        }
+    }
+
+
+    #Payment{
+        .title{
+            font-size: 1.3rem;
+        }
+        .paymentForm{
+            h4{
+                font-size: 1rem;
+            }
+        }
+    }
+}
+

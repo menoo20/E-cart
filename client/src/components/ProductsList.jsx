@@ -7,11 +7,11 @@ import ProductCard from './ProductCard'
 const ProductsList = ({name}) => {
 
     return (
-        <div class="wrapper mb-5">
+        <div className="wrapper mb-5">
             <h1 className='py-4 text-center  cat-title'>
                {name}
             </h1>
-            <div class="row g-1 justify-content-between">
+            <div className="row g-1 justify-content-between">
 
                 <ProductCard 
                   name="Red Redish"
