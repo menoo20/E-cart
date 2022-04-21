@@ -13,7 +13,7 @@ const QuantityChanger = () => {
   return (
     <div className="quant d-flex flex-row justify-content-between align-items-center px-3 py-3 ">
         <i className='bi bi-plus' onClick={Increase}></i>
-            <p className="fw-bold">{quant}</p>
+            <p className="fw-bold mb-0">{quant}</p>
         <i className='bi bi-dash' onClick={Decrease}></i>
     </div>
   )
