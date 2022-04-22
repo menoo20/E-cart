@@ -8,7 +8,7 @@ import PGallery from "./pages/PGallery";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./style/style.scss"
-import Card from "./pages/Card";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const [display, setDisplay] = useState("block")
@@ -37,7 +37,7 @@ return(
     {/* <Login/> */}
     {/* <Register/> */}
     {/* <ProductDetails/> */}
-    <Card/>
+    <Cart/>
     <Footer/>
     </React.Fragment>
   )

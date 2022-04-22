@@ -7,11 +7,11 @@ const PaymentMethods = () => {
         <div className="col-8 accordion px-0" id="Payment">
             <div className="accordion-item">
                 <h2 className="accordion-header" id="selectPayment">
-                <button className="accordion-button title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button className="accordion-button title collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     Payment Method
                 </button>
                 </h2>
-                <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="selectPayment" data-bs-parent="#Payment">
+                <div id="collapseOne" className="accordion-collapse collapse " aria-labelledby="selectPayment" data-bs-parent="#Payment">
                     <div className="accordion-body">
                            <PaymentOptions/>
                     </div>
