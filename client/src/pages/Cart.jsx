@@ -1,13 +1,13 @@
 import React from 'react'
 import CartBreadCrumb from '../components/CartBreadCrumb'
 import CartItem from '../components/CartItem'
-import "../style/Card.scss"
+import "../style/Cart.scss"
 import CartHead from '../components/CartHead'
 import CheckoutTotalCoupon from '../components/CheckoutTotalCoupon'
 import CheckoutTotal from '../components/CheckoutTotal'
 import PaymentMethods from '../components/PaymentMethods'
 
-const Card = () => {
+const Cart = () => {
   return (
     <>
     <CartBreadCrumb cat={"Cart"} catDesc="Shop The Way You Like" img="https://images.pexels.com/photos/5677794/pexels-photo-5677794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
@@ -33,4 +33,4 @@ const Card = () => {
   )
 }
 
-export default Card
+export default Cart

@@ -7,7 +7,8 @@ const CheckoutTotal = () => {
    const [Shipping, setShipping] = useState(true)
    const [Coupon, setCoupon] = useState(true)
    const [onSale, setOnSale] = useState(true)
-
+   const [disabled, setDisabled] = useState("disabled")
+   
    const CashD = ()=>{
     if(COD){
         return (
@@ -42,14 +43,18 @@ const SaleDiscount = ()=>{
 
   return (
     <div className='border rounded px-4 mb-3 py-3'>
+     <h2 className='text-primary mb-3'>Order Summary</h2>
      <PriceItem priceKind="ITEMS TOTAL" price="115"/>
      <CashD/>
      <ShippingFees/>
      <CouponApplied/>
      <SaleDiscount/>
      <hr />
+     <h2 className='text-primary my-3'>Order Total</h2>
      <PriceItem priceKind="TOTAL" price="125"/>
-     <button className='btn btn-success'></button>
+     <div className='d-grid'>
+        <button className='btn btn-warning' disabled={disabled?"true": "false"}>Place Your Order</button>
+    </div>
     </div>
   )
 }
