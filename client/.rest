@@ -1,0 +1,206 @@
+
+
+POST http://localhost:5000/login HTTP/1.1
+content-Type: "application/json"
+
+{
+    "email": "asd@gmail.com",
+    "password": "asdasd",
+}
+
+###
+
+POST http://localhost:5000/users HTTP/1.1
+Content-Type: "application/json"
+
+{
+    "f_name": "mmmm", 
+    "l_name": "aaaaa", 
+    "email": "asd@gmail.com", 
+    "password" :"asdasd", 
+    "birthday":"1111", 
+    "phone":"5555", 
+    "status":"active",
+    "city": "alex",
+    "address":"ddddd"
+}
+
+###
+
+POST http://localhost:5000/users HTTP/1.1
+content-type: application/json
+
+{
+    "f_name": "first", 
+    "l_name": "last", 
+    "email": "e", 
+    "password" :"e", 
+    "birthday":"2022-04-02T22:00:00.000Z", 
+    "phone":"56565656", 
+    "status":"active",
+    "city": "my city",
+    "address":"my adress"
+}
+
+###
+
+GET  http://localhost:5000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "j@gmail.com",
+    "password": "123"
+}
+
+###
+
+GET  http://localhost:5000/user HTTP/1.1
+content-type: application/json
+token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxNSwiZl9uYW1lIjoibW1tbSIsImxfbmFtZSI6ImFhYWFhIiwiZW1haWwiOiJhc2RAZ21haWwuY29tIiwicGFzc3dvcmQiOiJhc2Rhc2QiLCJiaXJ0aGRheSI6IjIwMjItMDQtMDFUMjI6MDA6MDAuMDAwWiIsInBob25lIjoiNTU1NSIsInN0YXR1cyI6ImFjdGl2ZSIsImNyZWF0ZWRfYXQiOiIyMDIyLTA0LTA2VDA1OjAyOjMwLjI2OVoiLCJjaXR5IjoiYWxleCIsImFkZHJlc3MiOiJkZGRkZCIsImNvdXBvbl9pZCI6bnVsbH0sImlhdCI6MTY0OTM2ODU0MX0.RGgnjskqL15np3QDCQgvNFZk0Z8fEadT4Qn4KsC-YE0"
+
+{
+    "email": "asd@gmail.com",
+    "password": "asdasd"
+}
+
+
+###
+
+PATCH  http://localhost:5000/products/12 HTTP/1.1
+content-type: application/json
+
+
+{
+    "image":"https://images-na.ssl-images-amazon.com/images/I/61Ff1Mtr8mL.__AC_SX300_SY300_QL70_ML2_.jpg"
+}
+
+###
+
+
+GET   http://localhost:5000/products/1  HTTP/1.1
+content-type: application/json
+
+
+###
+
+PATCH    http://localhost:5000/products/11  HTTP/1.1
+content-type: application/json
+
+{
+    "image": "https://cdn.pixabay.com/photo/2015/02/07/20/58/tv-627876_960_720.jpg"    
+}
+###
+
+GET     http://localhost:5000/4/products  HTTP/1.1
+content-type: application/json
+
+###
+
+GET     http://localhost:5000/categories/3  HTTP/1.1
+content-type: application/json
+
+
+###
+
+DELETE  http://localhost:5000/categories/1  HTTP/1.1
+content-type: application/json
+
+###
+
+get  http://localhost:5000/products?name=x  HTTP/1.1
+content-type: application/json
+
+
+###
+PATCH  http://localhost:5000/users/26 HTTP/1.1
+content-type: application/json
+token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyNiwiZl9uYW1lIjoiSm9obiIsImxfbmFtZSI6IlNtaXRoIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzIiwiYmlydGhkYXkiOiIyMDIyLTA0LTAxVDIyOjAwOjAwLjAwMFoiLCJwaG9uZSI6IjU1NTUiLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMi0wNC0xMFQwNzoxMTozNi4yMzVaIiwiY2l0eSI6InNzcyIsImFkZHJlc3MiOiJhc2Rhc2Rhc2QiLCJjb3Vwb25faWQiOm51bGx9LCJpYXQiOjE2NTAzMzc2ODh9.Ub5AHVwLUTkBG1PhqG-oZhFSztHENUR9tSl6w46pb18"
+
+{
+    "phone": "666666666"
+     
+}
+
+
+###
+PATCH  http://localhost:5000/users/26 HTTP/1.1
+content-type: application/json
+token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyNCwiZl9uYW1lIjoiYWRtaW4iLCJsX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJhZG1pbiIsImJpcnRoZGF5IjpudWxsLCJwaG9uZSI6bnVsbCwic3RhdHVzIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNC0wN1QwNToyNjowMi45OTlaIiwiY2l0eSI6bnVsbCwiYWRkcmVzcyI6bnVsbCwiY291cG9uX2lkIjpudWxsfSwiaWF0IjoxNjUwNDI4NzE1fQ.g2R6YOWQA42cnaQhlQ6qGnjfllGkVulPu6oAivWvjSU"
+
+{
+    "coupon_id":5
+}
+
+###
+PATCH  http://localhost:5000/products/2 HTTP/1.1
+content-type: application/json
+token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyNCwiZl9uYW1lIjoiYWRtaW4iLCJsX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJhZG1pbiIsImJpcnRoZGF5IjpudWxsLCJwaG9uZSI6bnVsbCwic3RhdHVzIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNC0wN1QwNToyNjowMi45OTlaIiwiY2l0eSI6bnVsbCwiYWRkcmVzcyI6bnVsbCwiY291cG9uX2lkIjpudWxsfSwiaWF0IjoxNjUwMzM3OTkxfQ.KQ3Ak3ULsa184rAm4LcjLhzso2zNTU-9fIp7XxxZ1Sk"
+
+{
+    "vote_total":12 ,
+    "vote_count":3
+}
+
+###
+POST   http://localhost:5000/coupons HTTP/1.1
+content-type: application/json
+token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyNCwiZl9uYW1lIjoiYWRtaW4iLCJsX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJhZG1pbiIsImJpcnRoZGF5IjpudWxsLCJwaG9uZSI6bnVsbCwic3RhdHVzIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNC0wN1QwNToyNjowMi45OTlaIiwiY2l0eSI6bnVsbCwiYWRkcmVzcyI6bnVsbCwiY291cG9uX2lkIjpudWxsfSwiaWF0IjoxNjUwMzM3OTkxfQ.KQ3Ak3ULsa184rAm4LcjLhzso2zNTU-9fIp7XxxZ1Sk"
+
+{
+    "code":"fifteen" ,
+    "value_of_100":15
+}
+
+###
+GET http://localhost:5000/users/26 HTTP/1.1
+content-type: application/json
+token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyNiwiZl9uYW1lIjoiSm9obiIsImxfbmFtZSI6IlNtaXRoIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzIiwiYmlydGhkYXkiOiIyMDIyLTA0LTAxVDIyOjAwOjAwLjAwMFoiLCJwaG9uZSI6IjU1NTUiLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMi0wNC0xMFQwNzoxMTozNi4yMzVaIiwiY2l0eSI6InNzcyIsImFkZHJlc3MiOiJhc2Rhc2Rhc2QiLCJjb3Vwb25faWQiOiI1In0sImlhdCI6MTY1MDQyOTA3MH0.o_1VZLHSqmDSmzIphdJ1VQg0qKF7ykkfzARYqyXN5jk"
+
+
+###
+GET    http://localhost:5000/api/products HTTP/1.1
+content-type: application/json
+
+###
+
+POST http://localhost:5000/api/products HTTP/1.1
+Content-Type: "application/json"
+
+{
+    "title": "testing shirt", 
+    "desc": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.", 
+    "img": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg", 
+    "categories" :"shirts", 
+    "size":"M", 
+    "color":"white", 
+    "price":"33",
+}
+
+###
+POST http://localhost:5000/api/products HTTP/1.1
+Content-Type: "application/json"
+
+{
+ "title": "testing shirt", 
+ "desc": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.", 
+  "img": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg", 
+ "categories" :"shirts", 
+  "size":"M", 
+ "color":"white", 
+ "price":"33",
+}
+
+###
+POST   http://localhost:5000/api/products HTTP/1.1
+content-type: application/json
+
+
+{
+    "title": "testing shirt", 
+    "desc": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.", 
+    "img": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg", 
+    "categories" :"shirts", 
+    "size":"M", 
+    "color":"white", 
+    "price":"33"
+}
