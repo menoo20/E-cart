@@ -1,66 +1,71 @@
 const router = require("express").Router();
 const User = require("../models/User");
-var jwt = require('jsonwebtoken');
+const CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
 
-router.post("/register", async (req,res)=>{
-    const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        salt: req.body.password
-    });
+//REGISTER
+router.post("/register", async (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.SECRET_KEY
+    ).toString(),
+  });
 
-    // Call setPassword function to hash password 
-    newUser.setPassword(req.body.password); 
+  try {
+    const savedUser = await newUser.save();
+    const { password, ...others } = savedUser._doc; 
+    res.status(201).json({...others});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//LOGIN
+// You should pass token in request header
+router.post('/login', async (req, res) => {
     try{
-        const savedUser = await newUser.save((err, User)=>{
-          if(err){
-              return res.status(500).send({
-                  message: "Failed to add user"
-              })
-          }else{
-            return  res.status(201).send({
-                  message: "User is added successfully"
-              })
-          }
-        });
+        const user = await User.findOne(
+            {
+                userName: req.body.username
+            }
+        );
+
+        !user && res.status(401).json("Wrong User Name");
+
+        const hashedPassword = CryptoJS.AES.decrypt(
+            user.password,
+            process.env.SECRET_KEY
+        );
+
+        const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+        const inputPassword = req.body.password;
+        
+        originalPassword != inputPassword && 
+            res.status(400).json("Wrong Password");
+
+        
+        const accessToken = jwt.sign(
+          {
+              id: user._id,
+              isAdmin: user.isAdmin,
+          },
+          process.env.JWT_SEC,
+              {expiresIn:"3d"}
+          );
+
+        
+        const { password, ...others } = user._doc;  
+        res.status(200).json({...others, accessToken});
+
     }catch(err){
         res.status(500).json(err);
     }
-})
 
-// User login api 
-router.post('/login', async(req, res) => { 
-
-    // Find user with requested email 
-    await User.findOne({ email : req.body.email }, function(err, user) { 
-        if (user === null) { 
-            return res.status(400).send({ 
-                message : "No user is registerd with this email."
-            }); 
-        } 
-        else { 
-            if (user.validPassword(req.body.password)) { 
-                const accessToken = jwt.sign({
-                    id: user._id,
-                    isAdmin: user.isAdmin
-                }, 
-                process.env.USER_TOKEN_SECRET,
-                {expiresIn: "3d"}
-                )
-                const {hash, salt, ...others} = user._doc;
-                return res.status(201).send({ 
-                    ...others,
-                    accessToken
-                }) 
-            } 
-            else { 
-                return res.status(400).send({ 
-                    message : "Wrong Password or email. please try again"
-                }); 
-            } 
-        } 
-    }).clone(); 
-}); 
+});
 
 
 module.exports = router;
