@@ -1,4 +1,6 @@
-const Order = require("../models/Order");
+const Order = require("../models/Order").order;
+const StatusEnum = require("../models/Order").statusEnum;
+const Cart = require("../models/Cart");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -21,14 +23,36 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //Create order
+//When check-out
 // in body only set address
 router.post("/:userId", verifyToken, async (req, res) => {
-  const cart = await Cart.findOne({ userId: req.params.userId });
   
-  //const newOrder = new Order(req.body);
   try {
-    //const savedOrder = await newOrder.save();
-    res.status(200).json(cart);
+    const cart = await Cart.findOne({ userId: req.params.userId });
+    
+    // get products list
+    //const {products, ...others} = cart;
+    let productList = cart["products"];
+
+    
+    // sum quantity of each product
+    let totalAmount = 0;
+    productList.forEach((elem) =>{
+      totalAmount += elem["quantity"];
+    });
+
+    console.log(totalAmount);
+
+    const newOrder = new Order({
+    userId: req.params.userId,
+    products: productList,
+    amount: totalAmount,
+    address: req.body.address
+    });
+
+    const savedOrder = await newOrder.save();
+
+    res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);
   }
