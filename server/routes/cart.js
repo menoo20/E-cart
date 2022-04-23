@@ -8,7 +8,7 @@ const {
 } = require("./verifyToken");
 
 //CREATE
-
+// userId is required
 router.post("/", verifyToken,async (req, res) => {
   const newCart = new Cart(req.body);
 
@@ -25,17 +25,13 @@ router.post("/:userId", verifyTokenAndAuthorization, async (req, res) => {
   const newProductList = req.body.products;
   
   try {
-    
-    await newProductList.forEach(element => {
-      Cart.findOneAndUpdate(
-        {userId: req.params.userId}, 
-        { $push: { products:  element} }
-      ); 
-    });
 
+    await Cart.findOneAndUpdate(
+      {userId: req.params.userId}, 
+      { $push: { products:  newProductList} }
+    );
+    
     const myCart = await Cart.findOne({ userId: req.params.userId });
-    
-    
     
     res.status(200).json(myCart);
   } catch (err) {
