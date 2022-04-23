@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const StatusEnum = Object.freeze({"PENDING":1, "INREVIEW":2, "INPROGRESS":3, "CANCELED":4, "ON_THE_WAY":5, "DELIVERED":6});
 
 const OrderSchema = new mongoose.Schema(

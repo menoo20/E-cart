@@ -1,3 +1,4 @@
+
 const Product = require("../models/Product");
 const router = require("express").Router();
 const {
@@ -97,8 +98,7 @@ router.get("/category", (req, res) => {
     if(err) console.log(err);
     res.status(200).json(elems);
   })
+
 });
-
-
 
 module.exports = router;

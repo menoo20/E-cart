@@ -1,0 +1,144 @@
+.wrapper {
+    margin-top: 30px;
+
+    .cat-title{
+        margin-bottom: 3rem;
+        position: relative;
+        font-weight:900;
+        &::after{
+            content: "";
+            position: absolute;
+            width: 8rem;
+            height: .4rem;
+            bottom: -1rem;
+            left:50%;
+            right:50%;
+            transform: translate(-50%,-50%);
+            background-color: rgb(139, 209, 34);
+            z-index: 1;
+        }        
+    }
+    .card {
+        border: 1px solid #eee;
+        cursor: pointer;
+        i{
+            font-size: 1.2rem;
+        }
+
+        &:hover .buttons {
+            opacity: 1
+        }
+        
+        &:hover .weight {
+            margin-top: 10px
+        }
+        
+        &:hover {
+            z-index: 2;
+        }
+
+        .weight {
+            margin-top: -65px;
+            transition: all 0.5s
+        }
+        
+        .weight small {
+            color: #e2dede
+        }
+        
+        .buttons {
+            padding: 10px;
+            background-color: #d6d4d44f;
+            border-radius: 4px;
+            position: relative;
+            margin-top: 7px;
+            opacity: 0;
+            transition: all 0.8s
+        }
+        
+     
+        
+        .cart {
+            position: relative;
+            height: 48px !important;
+            width: 50px;
+            margin-right: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 11px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 1s ease-in-out;
+            overflow: hidden;
+    
+    }
+      .cart-button {
+                height: 48px;
+                width: 100%;
+                &:focus {
+                    box-shadow: none
+                }
+                
+                &.clicked{
+                    span.dot {
+                        animation: item 0.3s ease-in forwards;
+                    }
+                } 
+
+                .dot {
+                    height: 14px;
+                    width: 14px;
+                    background-color: green;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 27%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 8px;
+                    color: #fff;
+                    opacity: 0
+                }
+            }
+          
+    }
+}
+
+
+
+@keyframes item {
+    0% {
+        opacity: 1;
+        top: 30%;
+        left: 30%
+    }
+
+    25% {
+        opacity: 1;
+        left: 26%;
+        top: 0%
+    }
+
+    50% {
+        opacity: 1;
+        left: 23%;
+        top: -22%
+    }
+
+    75% {
+        opacity: 1;
+        left: 19%;
+        top: -18%
+    }
+
+    90% {
+        opacity: 1;
+        left: 14%;
+        top: 28%
+    }
+
+
+}
+
