@@ -29,9 +29,11 @@ router.post('/login', async (req, res) => {
     try{
         const user = await User.findOne(
             {
-                userName: req.body.username
+              username: req.body.username
             }
         );
+
+        console.log("before ");
 
         !user && res.status(401).json("Wrong User Name");
 
@@ -57,7 +59,7 @@ router.post('/login', async (req, res) => {
               {expiresIn:"3d"}
           );
 
-        
+        console.log(user);          
         const { password, ...others } = user._doc;  
         res.status(200).json({...others, accessToken});
 
@@ -65,6 +67,21 @@ router.post('/login', async (req, res) => {
         res.status(500).json(err);
     }
 
+});
+
+router.get("/logout", async (req, res)=>{
+    /* res.clearCookie('jwt');
+    res.status(200).json("you loggedOut"); */
+
+    try {
+      req.user.tokens = req.user.tokens.filter((token) =>{
+       return token.token !== req.token 
+      })
+      await req.user.save()
+      res.send()
+    } catch (error) {
+        res.status(500).send()
+    }
 });
 
 module.exports = router;
