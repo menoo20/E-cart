@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
-
+const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -16,19 +16,20 @@ router.post("/register", async (req, res) => {
 
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    const { password, ...others } = savedUser._doc; 
+    res.status(201).json({...others});
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //LOGIN
-
+// You should pass token in request header
 router.post('/login', async (req, res) => {
     try{
         const user = await User.findOne(
             {
-                userName: req.body.user_name
+                userName: req.body.username
             }
         );
 
@@ -39,7 +40,6 @@ router.post('/login', async (req, res) => {
             process.env.SECRET_KEY
         );
 
-
         const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
         const inputPassword = req.body.password;
@@ -47,7 +47,17 @@ router.post('/login', async (req, res) => {
         originalPassword != inputPassword && 
             res.status(400).json("Wrong Password");
 
-  
+        
+        const accessToken = jwt.sign(
+          {
+              id: user._id,
+              isAdmin: user.isAdmin,
+          },
+          process.env.JWT_SEC,
+              {expiresIn:"3d"}
+          );
+
+        
         const { password, ...others } = user._doc;  
         res.status(200).json({...others, accessToken});
 
