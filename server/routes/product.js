@@ -2,7 +2,8 @@ const router = require("express").Router();
 const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
 const Product = require("../models/Product");
 
-router.post("/", verifyTokenAndAdmin, async(req, res)=>{
+router.post("/", async(req, res)=>{
+   
     const newProduct = await new Product(req.body)
  
     try{

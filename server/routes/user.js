@@ -49,7 +49,7 @@ router.get("/find/:id", verifyTokenAndAdmin, async(req, res)=>{
     }
 })
 
-router.get("/", verifyTokenAndAdmin, async(req, res)=>{
+router.get("/", async(req, res)=>{
     try{
         const recentUsers = req.query.new
         const users = recentUsers? await User.find().sort({_id: -1}).limit(2): await User.find()
