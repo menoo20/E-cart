@@ -1,0 +1,153 @@
+
+.footer {
+    background: #F3F6FA;
+    padding-top: 70px;
+    padding-bottom: 0;
+   
+   ul,ol{
+       padding-left: 0;
+   }
+  
+  .footer__about {
+    margin-bottom: 30px;
+  
+    ul {
+  
+      li {
+        font-size: 16px;
+        color: #1c1c1c;
+        line-height: 36px;
+        list-style: none;
+      }
+    }
+  }
+  
+  .footer__about__logo {
+    margin-bottom: 15px;
+  
+    a {
+      display: inline-block;
+    }
+  }
+  
+  .footer__widget {
+    margin-bottom: 30px;
+    overflow: hidden;
+  
+    h6 {
+      color: #1c1c1c;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  
+    ul {
+      width: 50%;
+      float: left;
+  
+      li {
+        list-style: none;
+  
+        a {
+          color: #1c1c1c;
+          font-size: 14px;
+          line-height: 32px;
+        }
+      }
+    }
+  
+    p {
+      font-size: 14px;
+      color: #1c1c1c;
+      margin-bottom: 30px;
+    }
+  
+    form {
+      position: relative;
+      margin-bottom: 30px;
+  
+      input {
+        width: 100%;
+        font-size: 16px;
+        padding-left: 20px;
+        color: #1c1c1c;
+        height: 46px;
+        border: 1px solid #ededed;
+  
+        &::placeholder {
+          color: #1c1c1c;
+        }
+        &:focus{
+            outline: none;
+        }
+      }
+  
+      button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 26px;
+        height: 100%;
+        background-color: #8bd122;
+        color: white;
+        font-size: 18px;
+        transition: all .3s ease;
+        &:hover{
+            border:  #8bd122 1px solid;
+            color: #8bd122;
+            background-color: transparent;
+        }
+        &:focus{
+            box-shadow: none !important;
+        }
+      }
+    }
+  
+    .footer__widget__social {
+  
+      a {
+        display: inline-block;
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        line-height: 38px;
+        text-align: center;
+        background: white;
+        transition: all .3s ease-in-out;
+        margin-right: 10px;
+
+        i{
+            font-size: 1.2rem;
+        }
+  
+        &:last-child {
+          margin-right: 0;
+        }
+  
+        &:hover {
+          background: #7fad39;;
+          color: white;
+          border-color: white;
+        }
+      }
+    }
+  }
+  
+  .footer__copyright {
+    border-top: 1px solid #ebebeb;
+    padding: 15px 0;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .footer__copyright__text {
+    font-size: 14px;
+    color: #1c1c1c;
+    float: left;
+    line-height: 25px;
+  }
+  
+  .footer__copyright__payment {
+    float: right;
+  }
+
+}

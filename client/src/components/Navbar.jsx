@@ -1,14 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from '@material-ui/icons/Search'; 
-import Badge from '@material-ui/core/Badge';
-import MailIcon from '@material-ui/icons/Mail';
 
 
 
-<Badge badgeContent={4} color="primary">
-  <MailIcon color="action" />
-</Badge>
 
 const Container = styled.div`
 height: 60px;
@@ -31,7 +25,8 @@ const Center = styled.div`
 `
 
 const Logo = styled.h1`
- 
+ font-size: 31px;
+ font-weight: bold;
 `
 
 const Right = styled.div`
@@ -41,7 +36,8 @@ const Right = styled.div`
  justify-content: flex-end;
 `
 const Language = styled.span`
- font-size: 14px;
+ font-size: 17px;
+ padding:5px;
  cursor: pointer;
 `
 
@@ -53,7 +49,9 @@ const SearchContainer = styled.div`
 `
 
 const Input = styled.input`
- border: none;
+ &:focus{
+   box-shadow:none
+ }
 `
 const MenuItem = styled.div`
  font-size: 14px;
@@ -68,20 +66,18 @@ const Navbar = () => {
     <Container> 
         <Wrapper>
             <Left>
-                <Language>EN</Language>
-                  <SearchContainer>
-                   <Input/>
-                   <Search style={{color: 'grey', fontSize: '17px'}}/>
-                </SearchContainer>
+                <Language className='me-2'>EN</Language>
+                <form className="d-flex ">
+                  <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                  <button className="btn btn-outline-primary" type="submit">Search</button>
+                </form>
             </Left>
             <Center><Logo>E-CART</Logo></Center>
             <Right>
               <MenuItem>Register</MenuItem>
               <MenuItem>Sign In</MenuItem>
               <MenuItem>
-                <Badge badgeContent={4} color="primary">
-                  <MailIcon />
-                </Badge>
+                
               </MenuItem>
             </Right>
         </Wrapper>
