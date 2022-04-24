@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./style/style.scss"
 import Cart from "./pages/Cart";
+import AdminPanel from "./components/admin/AdminPanel";
 
 const App = () => {
   const [display, setDisplay] = useState("block")
@@ -27,11 +28,16 @@ const App = () => {
 return(
     <React.Fragment>
     {/* page preloader */}
-    <div id="preloder" style={{display: display}}>
+   {/*  <div id="preloder" style={{display: display}}> */}
+    {/* <div id="preloder">
         <div className="loader"></div>
     </div>
     <Announcement/>
     <Navbar/>
+    </div> */}
+    {/* <Announcement/> */}
+    {/* <Navbar/> */}
+    <AdminPanel/>
     {/* <Home/> */}
     {/* <PGallery/> */}
     {/* <Login/> */}
@@ -39,6 +45,7 @@ return(
     {/* <ProductDetails/> */}
     <Cart/>
     <Footer/>
+   {/*  <Footer/> */}
     </React.Fragment>
   )
 };
