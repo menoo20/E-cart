@@ -10,6 +10,8 @@ import Footer from '../components/Footer'
 const Home = () => {
   return (
     <div>
+      <Announcement/>
+      <Navbar/>
       <Slider/>
       <div className="container-lg p-0 overflow-hidden">
         <ShopNow/>
@@ -17,6 +19,7 @@ const Home = () => {
         <ProductsList name={"Featured Products"}/>
         <AdsBanner/>
       </div>
+      <Footer/>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Route, Routes} from "react-router-dom"
 import Home from "./pages/Home";
 import Announcement from "./components/Announcement";
 import Navbar from "./components/Navbar";
@@ -13,6 +14,7 @@ import Cart from "./pages/Cart";
 const App = () => {
   const [display, setDisplay] = useState("block")
   
+  // this function is concerned with the page loader
   useEffect(()=>{
     function change(){setDisplay("none")}
     
@@ -26,19 +28,18 @@ const App = () => {
   
 return(
     <React.Fragment>
-    {/* page preloader */}
+      {/* // this function is concerned with the page loader */}
     <div id="preloder" style={{display: display}}>
         <div className="loader"></div>
     </div>
-    <Announcement/>
-    <Navbar/>
-    {/* <Home/> */}
-    {/* <PGallery/> */}
-    {/* <Login/> */}
-    {/* <Register/> */}
-    {/* <ProductDetails/> */}
-    <Cart/>
-    <Footer/>
+    <Routes>
+      <Route  path="/" exact element={<Home/>} />
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/register" element={<Register/>}/>
+      <Route path="/products/gallery" element={<PGallery/>}/>
+      <Route path="/product/:id" element={<ProductDetails/>}/>
+      <Route path="/cart" element={<Cart/>}/>
+    </Routes>
     </React.Fragment>
   )
 };

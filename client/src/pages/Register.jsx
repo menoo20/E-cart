@@ -4,6 +4,8 @@ import "../style/Register.scss"
 import "../style/utils.scss"
 import CardProfile from "../components/CardUploader";
 import Bg from "../images/bg.jpg"
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const Register = () => {
 
@@ -17,6 +19,8 @@ const Register = () => {
 
 
   return (
+    <>
+    <Navbar/>
     <div className="limiter ">
     <div className="container-login100 py-5" style={{backgroundImage: `url(${Bg})`}}>
         <div className="wrap-login100">
@@ -85,7 +89,10 @@ const Register = () => {
         </div>
     </div>
 </div>
+<Footer/>
+</>
   )
+
 }
 
 export default Register
