@@ -1,31 +1,57 @@
 const router = require("express").Router();
 const User = require("../models/User");
 var jwt = require('jsonwebtoken');
+const Cloudinary = require("../utils/cloudinary");
+const { append } = require("express/lib/response");
+
+
 
 router.post("/register", async (req,res)=>{
-    const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        salt: req.body.password
-    });
-
-    // Call setPassword function to hash password 
-    newUser.setPassword(req.body.password); 
+    const {fName, lName,email,avatar, password} = req.body
     try{
-        const savedUser = await newUser.save((err, User)=>{
-          if(err){
-              return res.status(500).send({
-                  message: "Failed to add user"
-              })
-          }else{
-            return  res.status(201).send({
-                  message: "User is added successfully"
-              })
-          }
+        const uploadedImg = await Cloudinary.uploader.upload(avatar,{
+            upload_preset: 'unsigned_upload',
+            public_id: `${fName} ${lName} avatar`
+        })
+
+        if(!uploadedImg){
+            res.status(500).json("image couldn't be loaded sorry for that")
+            return;
+        }
+        console.log(uploadedImg)
+        //creating a new user to save in the mongodb
+        const newUser = new User({
+            username: `${fName} ${lName}`,
+            avatar: uploadedImg.public_id,
+            fName,
+            lName,
+            email,
+            salt: password
         });
+
+
+        // Call setPassword function to hash password 
+        newUser.setPassword(req.body.password); 
+
+
+        //save the user to the mongodb
+        const savedUser = await newUser.save((err, User)=>{
+            if(err){
+                return res.status(500).send({
+                    message: "Failed to add user"
+                })
+            }else{
+                return  res.status(201).send({
+                    message: "User is added successfully",
+                    user: savedUser
+                })
+            }
+            });
     }catch(err){
-        res.status(500).json(err);
+        console.log(err);
+        res.status(500).send('connections abort')
     }
+
 })
 
 // User login api 

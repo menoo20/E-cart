@@ -5,6 +5,8 @@ import ProductsList from "../components/ProductsList"
 import PriceRangeSlider from '../components/PriceRangeSlider'
 import ProductSorter from '../components/ProductSorter'
 import SearchByCat from '../components/SearchByCat'
+import Navbar from '../components/Navbar'
+import Announcement from '../components/Announcement'
 
 
 const PGallery = () => {
@@ -12,6 +14,8 @@ const PGallery = () => {
 
   return (
     <React.Fragment>
+    <Announcement/>
+    <Navbar/>
     <BreadCrumb img={AllFood} cat={cat} catDesc={"Shop Through Millons Of Our Finest Products"}/>
     <div className='row justify-content-around align-items-center Categories-Filter px-4 pt-5 pb-3' >
         <div className="col-md-4 pt-3">
@@ -30,6 +34,7 @@ const PGallery = () => {
           <ProductsList name={"Our Products"}/>
       </div>
     </div>
+    <Footer/>
     </React.Fragment>
   )
 }

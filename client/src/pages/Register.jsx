@@ -1,22 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../style/Register.scss"
 import "../style/utils.scss"
 import CardProfile from "../components/CardUploader";
 import Bg from "../images/bg.jpg"
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import axios from "axios";
+
+
 
 const Register = () => {
+    
+
 
    const { register, handleSubmit } = useForm();
-   const onSubmit = data => console.log(data);
-   const handleChange= (e)=>{
-       console.log(e.target.files)
-   }
-
+   const [file,setFile] = useState("")
    
+   const onSubmit = async({fName,lName,email,password}) => {
+    
+    try{
+        const res = await axios.post("http://localhost:8000/api/auth/register",{
+            fName,
+            lName,
+            email,
+            password,
+            avatar: file,
+        })
 
+        console.log(res.data)
+    }catch(err){
+        console.log(err);
+    }
+    
+      
+    }
+       
 
   return (
+    <>
+    <Navbar/>
     <div className="limiter ">
     <div className="container-login100 py-5" style={{backgroundImage: `url(${Bg})`}}>
         <div className="wrap-login100">
@@ -25,10 +48,10 @@ const Register = () => {
                     Register
                 </span>
 
-                <CardProfile register={register}/>
+                <CardProfile register={register} setFile={setFile}/>
 
                 <div className="wrap-input100 " >
-                    <input {...register("firstname")} className="input100" type="text"  placeholder="First Name" autoComplete="new-password"></input>
+                    <input {...register("fName")} className="input100" type="text"  placeholder="First Name" autoComplete="new-password"></input>
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                         <i className="bi bi-card-text" aria-hidden="true"></i>
@@ -36,7 +59,7 @@ const Register = () => {
                 </div>
 
                 <div className="wrap-input100 " >
-                    <input {...register("lastname")} className="input100" type="text"  placeholder="Last Name" autoComplete="new-password"></input>
+                    <input {...register("lName")} className="input100" type="text"  placeholder="Last Name" autoComplete="new-password"></input>
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                         <i className="bi bi-card-heading" aria-hidden="true"></i>
@@ -85,7 +108,10 @@ const Register = () => {
         </div>
     </div>
 </div>
+<Footer/>
+</>
   )
+
 }
 
 export default Register

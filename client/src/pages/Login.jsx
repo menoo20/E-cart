@@ -3,14 +3,17 @@ import { useForm } from "react-hook-form";
 import "../style/login.scss"
 import "../style/utils.scss"
 import Avatar from "../images/img-01.png"
-
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
      
     return (
-    <div class="limiter ">
+	<>
+	<Navbar/>
+	<div class="limiter ">
 		<div class="container-login100 py-5">
 			<div class="wrap-login100 align-items-center justify-content-between">
 				<div class="login100-pic " >
@@ -71,6 +74,8 @@ const Login = () => {
 			</div>
 		</div>
 	</div>
+	<Footer/>
+	</>
   )
 }
 

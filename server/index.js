@@ -7,7 +7,6 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
-const paymentRoute = require("./routes/payment");
 dotenv.config();
 const cors = require("cors");
 
@@ -19,15 +18,14 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(cors()) 
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/order", orderRoute)
-app.use("/api/pay", paymentRoute)
 
 
 
-app.listen(process.env.PORT||5000, _=> console.log("backend server is running"))
+app.listen(process.env.PORT||5000, _=> console.log("backend server is running on port: "+ process.env.PORT))
