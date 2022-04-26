@@ -6,12 +6,20 @@ import CardProfile from "../components/CardUploader";
 import Bg from "../images/bg.jpg"
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+
 
 const Register = () => {
 
    const { register, handleSubmit } = useForm();
-   const onSubmit = data => console.log(data);
-   const handleChange= (e)=>{
+
+   const onSubmit =(data) => {
+    
+    console.log(data)
+
+      
+    }
+        const handleChange= (e)=>{
        console.log(e.target.files)
    }
 
@@ -32,7 +40,7 @@ const Register = () => {
                 <CardProfile register={register}/>
 
                 <div className="wrap-input100 " >
-                    <input {...register("firstname")} className="input100" type="text"  placeholder="First Name" autoComplete="new-password"></input>
+                    <input {...register("fName")} className="input100" type="text"  placeholder="First Name" autoComplete="new-password"></input>
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                         <i className="bi bi-card-text" aria-hidden="true"></i>
@@ -40,7 +48,7 @@ const Register = () => {
                 </div>
 
                 <div className="wrap-input100 " >
-                    <input {...register("lastname")} className="input100" type="text"  placeholder="Last Name" autoComplete="new-password"></input>
+                    <input {...register("lName")} className="input100" type="text"  placeholder="Last Name" autoComplete="new-password"></input>
                     <span className="focus-input100"></span>
                     <span className="symbol-input100">
                         <i className="bi bi-card-heading" aria-hidden="true"></i>
