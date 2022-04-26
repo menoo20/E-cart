@@ -2,7 +2,6 @@ const router = require("express").Router();
 const User = require("../models/User");
 var jwt = require('jsonwebtoken');
 const Cloudinary = require("../utils/cloudinary");
-const { append } = require("express/lib/response");
 
 
 
@@ -11,7 +10,7 @@ router.post("/register", async (req,res)=>{
     try{
         const uploadedImg = await Cloudinary.uploader.upload(avatar,{
             upload_preset: 'unsigned_upload',
-            public_id: `${fName} ${lName} avatar`
+            public_id: `${fName}${lName}avatar`
         })
 
         if(!uploadedImg){

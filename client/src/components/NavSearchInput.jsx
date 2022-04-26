@@ -36,7 +36,7 @@ const handleClick = (e)=>{
                 <li><a className="dropdown-item" href="#" value="Fruits">Fruits</a></li>
                 <li><a className="dropdown-item" href="#" value="Bread">Bread</a></li>
             </ul>
-            <Input type="text" className="form-control border-bottom-0" 
+            <Input type="text" className="form-control " 
             aria-label="Text input with dropdown button"
             placeholder='Product name'></Input>
             {/* <Span className="input-group-text submit-text" id="basic-addon1 p-0"> */}
