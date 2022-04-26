@@ -9,14 +9,10 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 
 
-
 const Register = () => {
-    
-
-
+   const [file, setFile] = useState("");
    const { register, handleSubmit } = useForm();
-   const [file,setFile] = useState("")
-   
+
    const onSubmit = async({fName,lName,email,password}) => {
     
     try{
