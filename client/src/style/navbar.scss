@@ -52,7 +52,16 @@
 // }
 
 
- .newNav{
+ nav{
+     background-color: black;
+     a,h2 , .nav-link{
+        
+        color: white !important;
+        transition: all 0.3s ease !important;
+        &:hover{
+            color: #8bd122 !important;
+        }
+     }
     .input-group{
       margin-bottom: 0 !important;
     }
