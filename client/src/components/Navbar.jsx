@@ -1,87 +1,55 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import NavSearchInput from './NavSearchInput';
+import SearchByCat from './SearchByCat';
+import userPlaceHolder from "../images/3177440.png"
 
 
 
-
-const Container = styled.div`
-height: 60px;
-`
-
-const Wrapper = styled.div`
- padding: 10px 20px;
- display: flex;
- justify-content: space-between;
- align-items: center;
-`
-const Left = styled.div`
- flex: 1;
- display: flex;
- align-items: center;
-`
-const Center = styled.div`
- flex: 1;
- text-align: center;
-`
-
-const Logo = styled.h1`
- font-size: 31px;
- font-weight: bold;
-`
-
-const Right = styled.div`
- flex: 1;
- display: flex;
- align-items: center;
- justify-content: flex-end;
-`
-const Language = styled.span`
- font-size: 17px;
- padding:5px;
- cursor: pointer;
-`
-
-const SearchContainer = styled.div`
- border: .5px solid lightgrey;
- display: flex;
- padding: 5px;
- margin-left :20px;
-`
-
-const Input = styled.input`
- &:focus{
-   box-shadow:none
- }
-`
-const MenuItem = styled.div`
- font-size: 14px;
- cursor: pointer;
- margin-left: 25px;
-`
-
-;
 
 const Navbar = () => {
   return (
-    <Container> 
-        <Wrapper>
-            <Left>
-                <Language className='me-2'>EN</Language>
-                <form className="d-flex ">
-                  <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                  <button className="btn btn-outline-primary" type="submit">Search</button>
-                </form>
-            </Left>
-            <Center><Logo>E-CART</Logo></Center>
-            <Right>
-              <MenuItem>Register</MenuItem>
-              <MenuItem>Sign In</MenuItem>
-              <MenuItem>
-                
-              </MenuItem>
-            </Right>
-        </Wrapper>
-    </Container>
+    <nav className="navbar navbar-expand-lg newNav">
+      <div className="container-fluid container-xxl align-items-center">
+        <Link to={"/"} className="navbar-brand" href="#">
+          <h2 className='mb-0'> <i className='bi bi-cart4'></i> e-cart</h2>
+        </Link>
+ 
+        <button class="navbar-toggler order-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">Categories</a>
+          </li>
+          <li className="nav-item dropdown">
+            <a className="nav-link" href="#">Contact us</a>
+          </li>
+          <li className='nav-item'>
+            <form action="" className='d-flex me-2 '>
+              <NavSearchInput/>
+            </form>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div className='me-2 order-4'>
+          <div className='d-flex align-self-center'>
+            <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
+            <div className='rounded-circle px-3'>
+              <img className='img-fluid' src={userPlaceHolder} alt="avatar" width={'40'} />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
   )
 }
 
