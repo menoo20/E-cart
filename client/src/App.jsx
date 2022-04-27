@@ -10,22 +10,20 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./style/style.scss"
 import Cart from "./pages/Cart";
-
 const App = () => {
   const [display, setDisplay] = useState("block")
   
   // this function is concerned with the page loader
   useEffect(()=>{
-    function change(){setDisplay("none")}
+    function  change(){setDisplay("none")}
     
     setTimeout(change,1000)
-
+    
     return ()=>{
       clearTimeout(change);
     }
   },[display])
 
-  
 return(
     <React.Fragment>
       {/* // this function is concerned with the page loader */}

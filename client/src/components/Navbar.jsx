@@ -27,9 +27,9 @@ const Navbar = () => {
             <a className="nav-link" href="#">Categories</a>
           </li>
           <li className="nav-item ">
-            <a className="nav-link" href="#">Contact us</a>
+            <a className="nav-link me-4" href="#">Contact us</a>
           </li>
-          <li className='nav-item'>
+          <li className='nav-item ms-lg-4 mt-lg-0 mt-2'>
               <NavSearchInput/>
           </li>
         </ul>

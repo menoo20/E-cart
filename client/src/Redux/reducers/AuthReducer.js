@@ -12,6 +12,9 @@ const AuthReducer = (state=initialValue, action)=>{
     return action.payload
     case "REGISTER":
     return action.payload
+
+    case "LOGOUT": 
+    return initialValue
     default:
         return state.user
 }
