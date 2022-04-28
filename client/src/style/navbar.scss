@@ -64,7 +64,9 @@
      }
     .input-group{
       margin-bottom: 0 !important;
-      
+      & .btn:focus{
+          background-color: #8bd122;
+      }
       button{
         background-color: #8bd122;
         border: #8bd122;

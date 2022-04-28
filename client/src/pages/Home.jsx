@@ -7,7 +7,10 @@ import ShopNow from '../components/ShopNow'
 import CategoriesPromoGrid from '../components/CategoriesPromoGrid'
 import AdsBanner from '../components/AdsBanner'
 import Footer from '../components/Footer'
+import { connect } from 'react-redux'
+import GoToTop from '../customHooks/GoToTop'
 const Home = () => {
+
   return (
     <div>
       <Announcement/>
@@ -19,9 +22,16 @@ const Home = () => {
         <ProductsList name={"Featured Products"}/>
         <AdsBanner/>
       </div>
+      <GoToTop/>
       <Footer/>
     </div>
   )
 }
 
-export default Home
+const mapStateToProps = ({user})=>{
+   return{
+     user
+   }
+}
+
+export default connect(mapStateToProps)(Home)

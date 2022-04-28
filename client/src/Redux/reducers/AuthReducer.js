@@ -1,6 +1,6 @@
 
 const initialValue = {
-    user: null
+    user: null,
 }
 
 

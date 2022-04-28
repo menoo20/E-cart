@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import { RegReq } from "../Redux/actions/AuthActions";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function Register(props) {
@@ -17,6 +18,14 @@ function Register(props) {
 
     const navigate = useNavigate();
 
+    //toast arguments
+    const toastId = React.useRef(null);
+
+    const successify = () => toastId.current = toast.loading("please wait ...")
+  
+    const dismiss = () =>  toast.dismiss(toastId.current);
+
+    let timeout;
     const onSubmit = async ({ fName, lName, email, password }) => {
         const data = {
             fName,
@@ -25,17 +34,16 @@ function Register(props) {
             password,
             avatar: file,
         };
+        timeout = setTimeout(successify, 0);
         await props.RegReq(data);
-        
-
+        setTimeout(dismiss,1000)
     };
 
     const {user} = props;
 
     useEffect(()=>{
         if(user){
-            console.log("there is user")
-            navigate("/login")
+            navigate("/")
         }
 
     },[user])
@@ -70,7 +78,7 @@ function Register(props) {
                             </div>
 
                             <div className="wrap-input100 ">
-                                <input {...register("email")} className="input100" type="email" placeholder="Email" autoComplete="new-password" required></input>
+                                <input {...register("email")} className="input100" type="email" placeholder="Email"  required></input>
                                 <span className="focus-input100"></span>
                                 <span className="symbol-input100">
                                     <i className="bi bi-envelope-fill" aria-hidden="true"></i>

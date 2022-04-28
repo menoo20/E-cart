@@ -6,22 +6,27 @@ import Avatar from "../images/img-01.png"
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import GoToTop from "../customHooks/GoToTop";
+
 
 
 const Login = ({user}) => {
     const { register, handleSubmit } = useForm();
-	const {Registerd, setRegistered} = useState(false);
+	const {Registerd, setRegistered} = useState(true);
     const onSubmit = data => console.log(data);
 
-     
+  
     return (
 	<>
 	<Navbar/>
+
 	<div className="limiter ">
 		<div className="container-login100 py-5">
 			<div className="wrap-login100 align-items-center justify-content-center justify-content-lg-between">
 				<div className="login100-pic " >
-					<img src={Avatar} alt="IMG"></img>
+					<img src={Avatar} alt="IMG" ></img>
 				</div>
 
 				<form className="login100-form " onSubmit={handleSubmit(onSubmit)} >
@@ -30,7 +35,7 @@ const Login = ({user}) => {
 					</span>
 
 					<div className="wrap-input100 " >
-						<input {...register("email")} className="input100" type="text"  placeholder="Email" autocomplete="new-password"></input>
+						<input {...register("email")} className="input100" type="text"  placeholder="Email" autoComplete="new-password"></input>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="bi bi-envelope-fill" aria-hidden="true"></i>
@@ -78,13 +83,13 @@ const Login = ({user}) => {
 			</div>
 		</div>
 	</div>
+	<GoToTop/>
 	<Footer/>
 	</>
   )
 }
 
 function mapStateToProps({user}){
-	console.log(user)
 	return{
 		user
 	}

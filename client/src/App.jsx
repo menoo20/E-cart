@@ -10,6 +10,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./style/style.scss"
 import Cart from "./pages/Cart";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   const [display, setDisplay] = useState("block")
   
@@ -30,7 +33,20 @@ return(
     <div id="preloder" style={{display: display}}>
         <div className="loader"></div>
     </div>
+    <ToastContainer
+      position="top-right"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      theme='dark'
+      draggable
+      pauseOnHover>
+    </ToastContainer>
     <Routes>
+ 
       <Route  path="/" exact element={<Home/>} />
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
@@ -41,5 +57,8 @@ return(
     </React.Fragment>
   )
 };
+
+
+
 
 export default App;

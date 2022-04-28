@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import {toast} from "react-toastify"
 function Login(payload){
     return {
         type: "LOGIN",
@@ -27,17 +28,22 @@ export const RegReq =  (data) => async dispatch => {
         data
     })
     if(result){
+        console.log("server responded and the result coming back from axios is: ", result)
      await   dispatch(Register(
+         
             {
-                fName:result.data.fName,
-                lName:result.data.lName,
-                avatar:result.data.avatar,
-                username: result.data.username,
-                // isAdmin: result.data.isAdmin
+                fName:result.data.user.fName,
+                lName:result.data.user.lName,
+                avatar:result.data.user.avatar,
+                username: result.data.user.username,
+                successRegister: result.data.successfulRegister,
+                isAdmin: result.data.isAdmin,
+                accessToken: result.data.accessToken
             }
         ))
-        
-        
+      const success = ()=> toast.success(`Congratulation. You are now logged in as ${result.data.user.fName} `)
+      success()
+      await dispatch(Login)
     }
 }
 
