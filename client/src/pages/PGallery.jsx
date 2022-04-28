@@ -7,7 +7,7 @@ import ProductSorter from '../components/ProductSorter'
 import SearchByCat from '../components/SearchByCat'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
-
+import Footer from '../components/Footer'
 
 const PGallery = () => {
   const [cat, setCat] = useState("All")

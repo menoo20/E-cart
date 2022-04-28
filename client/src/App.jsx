@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Route, Routes} from "react-router-dom"
 import Home from "./pages/Home";
-import Announcement from "./components/Announcement";
-import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
-import Footer from "./components/Footer";
 import PGallery from "./pages/PGallery";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,6 +9,7 @@ import "./style/style.scss"
 import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { connect } from "react-redux";
 
 const App = () => {
   const [display, setDisplay] = useState("block")
@@ -59,6 +57,11 @@ return(
 };
 
 
+const mapStateToProps = ({user})=>{
+   console.log(user);
+   return{
+     user,
+   }
+}
 
-
-export default App;
+export default connect(mapStateToProps)(App); ;
