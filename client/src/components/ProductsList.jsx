@@ -8,7 +8,7 @@ const ProductsList = ({name}) => {
 
     return (
         <div className="wrapper mb-5">
-            <h1 className='py-4 text-center  cat-title'>
+            <h1 className='py-4 text-center  cart-title'>
                {name}
             </h1>
             <div className="row g-1 justify-content-between">

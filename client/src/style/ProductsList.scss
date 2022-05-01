@@ -1,23 +1,7 @@
 .wrapper {
     margin-top: 30px;
 
-    .cat-title{
-        margin-bottom: 3rem;
-        position: relative;
-        font-weight:900;
-        &::after{
-            content: "";
-            position: absolute;
-            width: 8rem;
-            height: .4rem;
-            bottom: -1rem;
-            left:50%;
-            right:50%;
-            transform: translate(-50%,-50%);
-            background-color: rgb(139, 209, 34);
-            z-index: 1;
-        }        
-    }
+   
     .card {
         border: 1px solid #eee;
         cursor: pointer;

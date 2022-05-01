@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Route, Routes} from "react-router-dom"
+import {Navigate, Route, Routes} from "react-router-dom"
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import PGallery from "./pages/PGallery";
@@ -11,7 +11,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
 
-const App = () => {
+const App = (props) => {
   const [display, setDisplay] = useState("block")
   
   // this function is concerned with the page loader
@@ -24,6 +24,8 @@ const App = () => {
       clearTimeout(change);
     }
   },[display])
+
+  const user = props.user
 
 return(
     <React.Fragment>
@@ -47,7 +49,7 @@ return(
  
       <Route  path="/" exact element={<Home/>} />
       <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Register/>}/>
+      <Route path="/register"  element={user ? <Navigate to={'/'}/> : <Register/>}/>
       <Route path="/products/gallery" element={<PGallery/>}/>
       <Route path="/product/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart/>}/>
@@ -58,7 +60,6 @@ return(
 
 
 const mapStateToProps = ({user})=>{
-   console.log(user);
    return{
      user,
    }

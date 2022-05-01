@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NavSearchInput from './NavSearchInput';
 import SearchByCat from './SearchByCat';
-import userPlaceHolder from "../images/3177440.png"
+// import userPlaceHolder from "../images/3177440.png"
 import "../style/navbar.scss"
 import { connect } from 'react-redux';
+import Avatar from './CloudinaryImg/Avatar';
+
+const placeholderImg = 'https://res.cloudinary.com/e-cart2022/image/upload/v1651376145/static%20files/user_placeholder.png'
 
 const Navbar = ({user}) => {
   return (
@@ -58,23 +61,22 @@ const Navbar = ({user}) => {
                     (
                   <ul className="navbar-nav align-items-center me-auto mb-2 mb-lg-0 justify-content-between pe-auto">
                     <li className="nav-item ">
-                      <Link to={"/"} className="nav-link me-3" href="#">Login</Link>
+                      <Link to={"/login"} className="nav-link me-3" href="#">Login</Link>
                     </li>
                     <li className="nav-item ">
-                      <Link to={"/"} className="nav-link me-3" href="#">Register</Link>
+                      <Link to={"/register"} className="nav-link me-3" href="#">Register</Link>
                     </li>
                   </ul>
                   )
-              }
-            <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
-            {
-              user?
+                  }
+                  <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
+
+          
               <div className='rounded-circle px-3'>
-                <img className='img-fluid' src={userPlaceHolder} alt="avatar" width={'40'} />
-              </div>:
-              null
+              {
+              user? <Avatar avatar={user.avatar}/>:''
             }
-        
+              </div>
           </div>
         </div>
 
@@ -82,11 +84,10 @@ const Navbar = ({user}) => {
           <div className='d-flex align-self-center'>
             <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
             {
-              user?
-              <div className='rounded-circle px-3'>
-                <img className='img-fluid' src={userPlaceHolder} alt="avatar" width={'40'} />
-              </div>:
-              null
+              user && 
+              user.avatar?
+                <Avatar avatar={user.avatar ? user.avatar: placeholderImg}/>
+              :''
             }
           </div>
         </div>
@@ -98,7 +99,7 @@ const Navbar = ({user}) => {
 }
 
 const mapStateToProps = ({user})=>{
-  console.log(user);
+  console.log(user)
   return{
     user,
   }

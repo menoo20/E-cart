@@ -27,7 +27,7 @@ const CardProfile = ({register, setFile})=> {
                     onChange: (e)=>{
                       photoPreview(e)
                     }
-                  })} id="photo-upload" type="file"/> 
+                  })} id="photo-upload" type="file" accept="image/*"/> 
                 </label>
       </div>
     )
