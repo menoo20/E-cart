@@ -65,4 +65,4 @@ const mapStateToProps = ({user})=>{
    }
 }
 
-export default connect(mapStateToProps, {Test})(App); ;
+export default connect(mapStateToProps)(App); ;
