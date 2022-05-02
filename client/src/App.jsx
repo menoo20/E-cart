@@ -10,7 +10,6 @@ import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
-import { Test } from "./Redux/actions/AuthActions";
 
 const App = (props) => {
   const [display, setDisplay] = useState("block")
