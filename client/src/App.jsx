@@ -10,11 +10,12 @@ import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
+import { Test } from "./Redux/actions/AuthActions";
 
 const App = (props) => {
   const [display, setDisplay] = useState("block")
+
   
-  // this function is concerned with the page loader
   useEffect(()=>{
     function  change(){setDisplay("none")}
     
@@ -65,4 +66,4 @@ const mapStateToProps = ({user})=>{
    }
 }
 
-export default connect(mapStateToProps)(App); ;
+export default connect(mapStateToProps, {Test})(App); ;

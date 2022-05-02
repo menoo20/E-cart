@@ -22,14 +22,6 @@ function Logout(){
     }
 }
 
-function authErrors(payload){
-    console.log(payload)
-    return{
-        type: 'AUTH_ERROR',
-        payload
-    }
-}
-
 
 export const RegReq =  (data) => async dispatch => {
     const result = await axios.post("http://localhost:8000/api/auth/register",{
