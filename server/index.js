@@ -7,6 +7,11 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
+const cookieParser = require("cookie-parser");
+
+
+
+
 dotenv.config();
 const cors = require("cors");
 
@@ -25,7 +30,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/order", orderRoute)
-
+app.use(cookieParser())
 
 
 app.listen(process.env.PORT||5000, _=> console.log("backend server is running on port: "+ process.env.PORT))
