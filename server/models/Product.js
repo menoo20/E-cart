@@ -9,6 +9,14 @@ const ProductSchema = new mongoose.Schema(
     size: { type: String },
     color: { type: String },
     price: { type: Number, required: true },
+    reviews: [
+      {
+        userId: {
+          type: String,
+        },
+        reviewDescription: {type: String},
+      },
+    ],
     
   },
   { timestamps: true }
