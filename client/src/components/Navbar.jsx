@@ -1,14 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import NavSearchInput from './NavSearchInput';
 import SearchByCat from './SearchByCat';
-// import userPlaceHolder from "../images/3177440.png"
 import "../style/navbar.scss"
 import { connect } from 'react-redux';
-import Avatar from './CloudinaryImg/Avatar';
-
-const placeholderImg = 'https://res.cloudinary.com/e-cart2022/image/upload/v1651376145/static%20files/user_placeholder.png'
+import UserDropdown from './UserDropdown';
 
 const Navbar = ({user}) => {
   return (
@@ -69,12 +65,15 @@ const Navbar = ({user}) => {
                   </ul>
                   )
                   }
-                  <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
 
+              <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
           
               <div className='rounded-circle px-3'>
               {
-              user? <Avatar avatar={user.avatar}/>:''
+              user?
+              <UserDropdown drop="dropdown-menu-end"/>
+               :
+               ''
             }
               </div>
           </div>
@@ -84,9 +83,8 @@ const Navbar = ({user}) => {
           <div className='d-flex align-self-center'>
             <img className='cursor-pointer' src="https://img.icons8.com/color/40/000000/add-shopping-cart--v1.png"/>
             {
-              user && 
-              user.avatar?
-                <Avatar avatar={user.avatar ? user.avatar: placeholderImg}/>
+              user? 
+              <UserDropdown drop="dropend"/>
               :''
             }
           </div>
@@ -99,7 +97,6 @@ const Navbar = ({user}) => {
 }
 
 const mapStateToProps = ({user})=>{
-  console.log(user)
   return{
     user,
   }

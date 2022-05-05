@@ -3,7 +3,7 @@ import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 
 // Import required actions.
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
+import {thumbnail, fill} from "@cloudinary/url-gen/actions/resize";
 
 // Import required qualifiers.
 import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
@@ -28,7 +28,7 @@ const Avatar = ({avatar}) => {
     // Apply the transformation.
     myImage?
     (myImage
-    .resize(thumbnail().width(40).height(40).gravity(focusOn(FocusOn.face())))
+    .resize(fill().width(40).height(40).gravity(focusOn(FocusOn.face())))
     )
     :
     ""

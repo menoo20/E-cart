@@ -9,13 +9,37 @@ import { connect } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import GoToTop from "../customHooks/GoToTop";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginReq } from "../Redux/actions/AuthActions";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+    email: yup.string().required("Can't Be Empty").email("Must Be email form with @ and ."),
+	password: yup.string().required("Please Enter Your Password")
+  }).required();
 
 
-
-const Login = ({user}) => {
-    const { register, handleSubmit } = useForm();
+const Login = ({user, LoginReq}) => {
+    const { register, handleSubmit, formState: {errors} } = useForm({
+        resolver: yupResolver(schema)
+      });
 	const {Registerd, setRegistered} = useState(true);
-    const onSubmit = data => console.log(data);
+	const navigate = useNavigate()
+	
+	//toast arguments
+	const toastId = React.useRef(null);
+
+    const check = () => toastId.current = toast.loading("please wait ...")
+  
+    const dismiss = () =>  toast.dismiss(toastId.current);
+    
+	let timeout;
+    const onSubmit = async data => {
+	 timeout = setTimeout(check, 0);
+	 await	LoginReq(data);
+	 setTimeout(dismiss)
+	}
 
   
     return (
@@ -35,19 +59,21 @@ const Login = ({user}) => {
 					</span>
 
 					<div className="wrap-input100 " >
-						<input {...register("email")} className="input100" type="text"  placeholder="Email" autoComplete="new-password"></input>
+						<input {...register("email")} className="input100" type="text"  placeholder="Email" ></input>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="bi bi-envelope-fill" aria-hidden="true"></i>
 						</span>
+						<p className={`error position-absolute ${errors.email?"active":""}`}>{errors.email?<i className="bi bi-info-circle me-2"></i>:""}{errors.email?.message}</p>
 					</div>
 
-					<div className="wrap-input100 " >
+					<div className="wrap-input100 mt-4" >
 						<input {...register("password")} className="input100" type="password"  placeholder="Password"></input>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="bi bi-shield-lock-fill" aria-hidden="true"></i>
 						</span>
+						<p className={`error position-absolute ${errors.password?"active":""}`}>{errors.password?<i className="bi bi-info-circle me-2"></i>:""}{errors.password?.message}</p>
 					</div>
 					
 					<div className="input-group my-4" >
@@ -74,10 +100,10 @@ const Login = ({user}) => {
 					</div>
 
 					<div className="text-center p-t-70">
-						<a className="txt2" href="#">
+						<Link to="/register" className="txt2">
 							Create your Account
 							<i className="bi bi-arrow-right ms-3" aria-hidden="true"></i>
-						</a>
+						</Link>
 					</div>
 				</form>
 			</div>
@@ -95,5 +121,5 @@ function mapStateToProps({user}){
 	}
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps, {LoginReq})(Login)
 

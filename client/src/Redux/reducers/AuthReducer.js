@@ -2,9 +2,7 @@
 
 
 
-const initialValue = {
-    user: null,
-}
+const initialValue = null
 
 
 const AuthReducer = (state=initialValue, action)=>{
@@ -19,7 +17,7 @@ const AuthReducer = (state=initialValue, action)=>{
     case "LOGOUT": 
     return initialValue
     default:
-        return state.user
+        return state
 }
 }
 

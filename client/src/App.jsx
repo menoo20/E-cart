@@ -29,13 +29,14 @@ const App = (props) => {
 
 return(
     <React.Fragment>
-      {/* // this function is concerned with the page loader */}
+    {/* // this function is concerned with the page loader */}
     <div id="preloder" style={{display: display}}>
         <div className="loader"></div>
     </div>
+    {/* here is the toast container for react toastify */}
     <ToastContainer
       position="top-right"
-      autoClose={4000}
+      autoClose={3000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
@@ -45,21 +46,24 @@ return(
       draggable
       pauseOnHover>
     </ToastContainer>
+
+    {/* starting the routes */}
     <Routes>
- 
       <Route  path="/" exact element={<Home/>} />
-      <Route path="/login" element={<Login/>}/>
+      <Route path="/login" element={user? <Navigate to={"/"}/> : <Login/>}/>
       <Route path="/register"  element={user ? <Navigate to={'/'}/> : <Register/>}/>
       <Route path="/products/gallery" element={<PGallery/>}/>
       <Route path="/product/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart/>}/>
     </Routes>
+
     </React.Fragment>
   )
 };
 
 
 const mapStateToProps = ({user})=>{
+  console.log(user)
    return{
      user,
    }

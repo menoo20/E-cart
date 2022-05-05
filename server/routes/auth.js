@@ -4,7 +4,8 @@ const uploadedImg = require("../utils/singleImgUpload")
 const handleError = require("../utils/UserErrors");
 const createToken = require("../utils/createJwtToken")
 const validate = require("validator")
-
+const {verifyTokenAndAuthorize} = require("../middlewares/authorizeToken");
+const { findOne } = require("../models/User");
 
 //registering a new user
 router.post("/register", async (req,res)=>{
@@ -67,7 +68,7 @@ router.post("/register", async (req,res)=>{
                     user :{
                         avatar :user.avatar,
                         username: user.username,
-                        _id: user._id,
+                        isAdmin: user.isAdmin,
                     },
                     accessToken,
                     successfulRegister: `Congratulations. You are now Logged In as ${user.username}`
@@ -86,33 +87,36 @@ router.post("/register", async (req,res)=>{
 
 // User login api 
 router.post('/login', async(req, res) => { 
-
+    const {email, password} = req.body.data;
+    if(!password){
+       return res.status(500).json({
+            message: "please enter the password"
+        })
+    }
     // Find user with requested email 
-    await User.findOne({ email : req.body.email }, function(err, user) { 
-        if (user === null) { 
-            return res.status(400).send({ 
-                message : "No user is registerd with this email."
-            }); 
-        } 
-        else { 
-            if (user.validPassword(req.body.password)) { 
-                const accessToken = createToken(user._id, user.isAdmin)
-                const {hash, salt, ...others} = user._doc;
-                return res.status(201).send({ 
-                    ...others,
-                    accessToken
-                }) 
-            } 
-            else { 
-                
-                return res.status(400).send({ 
-                    message : "Wrong Password or email. please try again"
-                }); 
-            } 
-        } 
-    }).clone(); 
-}); 
+    const user = await User.findOne({email}, function(err, user){
+        if(user === null){
+            return res.status(400).json({
+                message: "User was not found. Please enter a valid email"
+            })
+        }
 
+    }).clone()
+
+    const checkPass = await user.validPassword(password);
+    if(checkPass){
+       const  {hash, salt, fName, lName, email,createdAt, updatedAt, isAdmin, _id, ...others} = user._doc;
+       const accessToken = createToken(user._id, user.isAdmin)
+       return res.status(200).json({
+           ...others,
+           accessToken
+       })
+    }else{
+        return res.status(500).json({
+            message: "wrong email or passowrd. Please Try again"
+        })
+    }
+}); 
 
 
 

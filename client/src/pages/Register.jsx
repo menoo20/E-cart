@@ -45,7 +45,7 @@ function Register(props) {
             fName,
             lName,
             username,
-            email,
+            email : email.toLowerCase(),
             password,
             avatar: file,
         };
