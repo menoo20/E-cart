@@ -1,6 +1,9 @@
 import { RegReq } from "./AuthActions";
+import {getCategories, getFeaturedCat} from "./categoryAction"
 
-module.exports = {
+export  {
     RegReq,
-    
+    getCategories,
+    getFeaturedCat
 }
+    

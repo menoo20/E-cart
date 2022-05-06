@@ -60,8 +60,13 @@ router.get("/find/:id", async(req, res)=>{
 
 router.get("/", async(req, res)=>{
     try{
+        if(req.query.featured){
+            const categories = await Category.find({featured: true}).limit(3)
+            return res.status(200).json(categories);
+        }
       
         const categories = await Category.find();
+        console.log(categories);
         res.status(200).json(categories)
     }catch(err){
         res.json("something wrond happend")

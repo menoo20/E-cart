@@ -1,6 +1,6 @@
 
-import axios from "axios";
 import {toast} from "react-toastify"
+import { userAuth } from "../Axios/user";
 function Login(payload){
     return {
         type: "LOGIN",
@@ -26,7 +26,7 @@ export  function Logout(){
 
 
 export const RegReq =  (data) => async dispatch => {
-    const result = await axios.post("http://localhost:8000/api/auth/register",{
+    const result = await userAuth.post("/register",{
         data
     })
     try{
@@ -57,7 +57,7 @@ export const RegReq =  (data) => async dispatch => {
 
 
 export const LoginReq =  (data) => async dispatch => {
-    axios.post("http://localhost:8000/api/auth/login",{
+    userAuth.post("/login",{
         data
     }).then(response=>{
         console.log(response.data)

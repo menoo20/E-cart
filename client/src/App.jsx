@@ -10,6 +10,8 @@ import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
+import  {getFeaturedCat} from "./Redux/actions";
+
 
 const App = (props) => {
   const [display, setDisplay] = useState("block")
@@ -24,6 +26,11 @@ const App = (props) => {
       clearTimeout(change);
     }
   },[display])
+
+  //get featured products
+  useEffect(()=>{
+     props.getFeaturedCat();
+  },[])
 
   const user = props.user
 
@@ -62,11 +69,11 @@ return(
 };
 
 
-const mapStateToProps = ({user})=>{
-  console.log(user)
+const mapStateToProps = ({user, categories})=>{
    return{
      user,
+     categories
    }
 }
 
-export default connect(mapStateToProps)(App); ;
+export default connect(mapStateToProps, {getFeaturedCat})(App); ;
