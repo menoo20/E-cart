@@ -7,6 +7,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
+const categoriesRoute = require("./routes/category")
 const cookieParser = require("cookie-parser");
 
 
@@ -14,6 +15,7 @@ const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const cors = require("cors");
+const Category = require("./models/Category");
 
 
  
@@ -30,6 +32,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/order", orderRoute)
+app.use("/api/category", categoriesRoute)
 app.use(cookieParser())
 
 

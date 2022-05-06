@@ -1,16 +1,17 @@
 const router = require("express").Router();
-const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
+const { verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
+const Category = require("../models/Category");
 const Product = require("../models/Product");
 
 router.post("/", verifyTokenAndAdmin, async(req, res)=>{
-    const newProduct = await new Product(req.body)
+    const newCategory = await new Category(req.body)
  
     try{
-       await newProduct.save((err, product)=>{
+       await newCategory.save((err, category)=>{
             if(err){
                 res.status(500).json(err);
             }else{
-                res.status(200).json(product)
+                res.status(200).json(category)
             }
         })
     }catch(err){
@@ -23,7 +24,7 @@ router.post("/", verifyTokenAndAdmin, async(req, res)=>{
 
 
 router.put("/:id", verifyTokenAndAdmin, async (req, res)=>{
-  Product.findByIdAndUpdate(req.params.id,
+  Category.findByIdAndUpdate(req.params.id,
         {
         $set: req.body,
     }
@@ -31,7 +32,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res)=>{
         if(docs){
             res.status(200).json(docs)
         }else{
-            res.status(500).json("something went wrong")
+            res.status(500).json("Category was not updated")
         }
     })
 })
@@ -39,7 +40,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res)=>{
 router.delete("/:id", verifyTokenAndAdmin, async(req, res)=>{
     const id = req.params.id;
     try{
-        await Product.findByIdAndRemove(id)
+        await Category.findByIdAndRemove(id)
         res.status(200).json("product has been deleted");
     }catch(err){
         res.json("something wrond happend")
@@ -50,8 +51,8 @@ router.delete("/:id", verifyTokenAndAdmin, async(req, res)=>{
 router.get("/find/:id", async(req, res)=>{
     const id = req.params.id;
     try{
-        const product = await Product.findById(id)
-        return res.status(201).json(product) 
+        const category = await Category.findById(id)
+        return res.status(201).json(category) 
     }catch(err){
         res.json("something wrond happend")
     }
@@ -59,17 +60,9 @@ router.get("/find/:id", async(req, res)=>{
 
 router.get("/", async(req, res)=>{
     try{
-        const recentProducts = req.query.new
-        const qCategory = req.query.category;
-        let products;
-        if(recentProducts){
-             products = await Product.find().sort({createdAt: -1}).limit(5)
-        }else if(qCategory){
-             products = await Product.find({categories: {$in: [qCategory]}})
-        }else{
-          products = await Product.find().populate('categories');
-        }
-        res.status(200).json(products)
+      
+        const categories = await Category.find();
+        res.status(200).json(categories)
     }catch(err){
         res.json("something wrond happend")
     }

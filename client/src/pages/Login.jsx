@@ -20,7 +20,7 @@ const schema = yup.object({
   }).required();
 
 
-const Login = ({user, LoginReq}) => {
+const Login = ({ LoginReq}) => {
     const { register, handleSubmit, formState: {errors} } = useForm({
         resolver: yupResolver(schema)
       });

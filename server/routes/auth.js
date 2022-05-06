@@ -69,6 +69,8 @@ router.post("/register", async (req,res)=>{
                         avatar :user.avatar,
                         username: user.username,
                         isAdmin: user.isAdmin,
+                        email: user.email,
+                        id: user._id
                     },
                     accessToken,
                     successfulRegister: `Congratulations. You are now Logged In as ${user.username}`
@@ -105,7 +107,7 @@ router.post('/login', async(req, res) => {
 
     const checkPass = await user.validPassword(password);
     if(checkPass){
-       const  {hash, salt, fName, lName, email,createdAt, updatedAt, isAdmin, _id, ...others} = user._doc;
+       const  {hash, salt, fName, lName,createdAt, updatedAt, isAdmin, ...others} = user._doc;
        const accessToken = createToken(user._id, user.isAdmin)
        return res.status(200).json({
            ...others,
