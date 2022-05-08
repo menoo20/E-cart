@@ -1,11 +1,12 @@
 
 const User = require("../models/User");
+const Product = require("../models/Product");
 const router = require("express").Router();
 const {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
-} = require("./verifyToken");
+} = require("../utils/verifyToken");
 
 
 //UPDATE
@@ -63,13 +64,48 @@ router.get("/", verifyTokenAndAdmin, async(req, res) => {
       }
   });
 });
-  /* try {
-    const user = await User;
-    const { password, ...others } = user._doc;
-    res.status(200).json(others);
+
+
+// add review to a product
+router.post("/:userId/addReview/:productId", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const review = req.body.reviewDescription;
+
+    // use these variables in validation
+    //const user = await User.findById(req.params.userId);
+    //const product = await Product.findById(req.params.productId);
+
+    const reviewObj = {userId: req.params.userId, reviewDescription: req.body.reviewDescription};
+
+    await Product.findOneAndUpdate(
+      {_id: req.params.productId}, 
+      { $push: { reviews:  reviewObj} }
+    );
+
+    res.status(200).json("New review added to this product");
   } catch (err) {
     res.status(500).json(err);
-  } */
+  }
 
+});
+
+
+/* // reset password
+router.put("/resetPassword", async (req, res) => {
+  
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}); */
 
 module.exports = router;
