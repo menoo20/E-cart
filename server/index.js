@@ -8,6 +8,7 @@ const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
 const categoriesRoute = require("./routes/category")
+const reviewsRoute = require("./routes/review")
 const cookieParser = require("cookie-parser");
 
 
@@ -33,6 +34,7 @@ app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/order", orderRoute)
 app.use("/api/category", categoriesRoute)
+app.use("/api/reviews", reviewsRoute)
 app.use(cookieParser())
 
 

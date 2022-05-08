@@ -1,9 +1,26 @@
 const router = require("express").Router();
 const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
 const Product = require("../models/Product");
+const uploadedImgs = require("../utils/multipleImageUpload");
 
 router.post("/", verifyTokenAndAdmin, async(req, res)=>{
-    const newProduct = await new Product(req.body)
+    console.log(req.body)
+    const {images, title, ...others} = req.body
+    // uploading the images to cloudinary
+    const publicIds = await uploadedImgs(images, title, res);
+    if(!publicIds.length){
+      res.status(500).json("you must add at least one image")
+      return;
+    }
+
+    // constructing the body with all the needed data for making a product in the db
+    const body = {
+        images: publicIds,
+        title,
+        ...others
+    } 
+    // // add the new product to the db
+    const newProduct = await new Product(body)
  
     try{
        await newProduct.save((err, product)=>{

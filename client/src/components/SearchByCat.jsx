@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
+import { connect } from 'react-redux'
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
+
 
 const Button = styled.button`
 &:focus{
@@ -15,7 +18,7 @@ const Input = styled.input`
  }
 `
 
-const SearchByCat = () => {
+const SearchByCat = ({categories}) => {
     const [categoryName, setCategoryName] = useState("Category")
 
     const handleClick = (e)=>{
@@ -27,10 +30,16 @@ const SearchByCat = () => {
     <div className="input-group mb-3">
         <Button className="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">{categoryName==="All"? "Category": categoryName}</Button>
         <ul className="dropdown-menu " onClick={e => handleClick(e)}>
-            {categoryName === "All" || categoryName === "Category" ? "" :<li><a className="dropdown-item" href="#" value="All" >All</a></li>}
-            <li><a className="dropdown-item" href="#" value="Vegetables" >Vegetables</a></li>
-            <li><a className="dropdown-item" href="#" value="Fruits">Fruits</a></li>
-            <li><a className="dropdown-item" href="#" value="Bread">Bread</a></li>
+            {categoryName === "All" || categoryName === "Category" ? "" :<li><Link className="dropdown-item" to="#" value="All" >All</Link></li>}
+            {categories.map(category=> {
+              return (
+                <li key={category.name}>
+                  <Link className="dropdown-item" to="#" value={category.name}>
+                  {category.name}
+                  </Link>
+                </li>
+              )
+            })}
         </ul>
         <Input type="text" className="form-control py-2" 
         aria-label="Text input with dropdown button"
@@ -39,4 +48,8 @@ const SearchByCat = () => {
   )
 }
 
-export default SearchByCat
+const mapStateToProps = ({categories}) => {
+  return {categories}
+}
+
+export default connect(mapStateToProps)(SearchByCat) 

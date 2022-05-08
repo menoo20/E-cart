@@ -14,7 +14,7 @@ router.post("/register", async (req,res)=>{
     let uploadedImage
     try{   
          if(avatar){
-         uploadedImage = await uploadedImg(avatar, username, res)
+         uploadedImage = await uploadedImg(avatar, username, res, folder="User_Avatar")
          }
      
         //creating a new user to save in the mongodb
