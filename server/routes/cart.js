@@ -5,7 +5,7 @@ const {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
-} = require("./verifyToken");
+} = require("../utils/verifyToken");
 
 //CREATE
 // userId is required

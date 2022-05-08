@@ -13,6 +13,8 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const paymentRoute = require("./routes/stripe");
 const resetPass = require("./routes/reset-password");
+const brandRoute = require("./routes/brand");
+const categoryRoute = require("./routes/category");
 
 const cors = require("cors");
 
@@ -35,8 +37,8 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", paymentRoute);
 app.use("/api/reset-password", resetPass);
-
-
+app.use("/api/brand", brandRoute);
+app.use("/api/category", categoryRoute);
 
 
 
