@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import BreadCrumb from '../components/BreadCrumb'
 import AllFood from "../images/allfood.jpg"
 import ProductsList from "../components/ProductsList"
@@ -8,9 +8,16 @@ import SearchByCat from '../components/SearchByCat'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
+import { connect } from 'react-redux'
+import {getProducts} from '../Redux/actions'
 
-const PGallery = () => {
+const PGallery = ({products, getAll, getProducts}) => {
   const [cat, setCat] = useState("All")
+
+ useEffect(()=>{
+   getProducts()
+   console.log("am trying to get all products")
+ },[])
 
   return (
     <React.Fragment>
@@ -31,7 +38,7 @@ const PGallery = () => {
     <div className="container">
       <div className="row justify-content-around align-items-center">
         
-          <ProductsList name={"Our Products"}/>
+          <ProductsList products={products} name={"Our Products"}/>
       </div>
     </div>
     <Footer/>
@@ -39,4 +46,10 @@ const PGallery = () => {
   )
 }
 
-export default PGallery
+function mapStateToProps({products}){
+  return{
+    products: products.products
+  }
+}
+
+export default connect(mapStateToProps, {getProducts})(PGallery)

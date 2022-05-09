@@ -49,7 +49,9 @@ const SearchByCat = ({categories}) => {
 }
 
 const mapStateToProps = ({categories}) => {
-  return {categories}
+  return {
+    categories: categories.categories
+  }
 }
 
 export default connect(mapStateToProps)(SearchByCat) 

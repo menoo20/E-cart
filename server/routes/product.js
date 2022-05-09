@@ -2,39 +2,36 @@ const router = require("express").Router();
 const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
 const Product = require("../models/Product");
 const uploadedImgs = require("../utils/multipleImageUpload");
+const handleProductError = require("../utils/productErrors");
 
 router.post("/", verifyTokenAndAdmin, async(req, res)=>{
-    console.log(req.body)
     const {images, title, ...others} = req.body
     // uploading the images to cloudinary
     const publicIds = await uploadedImgs(images, title, res);
-    if(!publicIds.length){
-      res.status(500).json("you must add at least one image")
-      return;
-    }
 
+    
     // constructing the body with all the needed data for making a product in the db
-    const body = {
-        images: publicIds,
-        title,
-        ...others
-    } 
-    // // add the new product to the db
-    const newProduct = await new Product(body)
- 
-    try{
-       await newProduct.save((err, product)=>{
-            if(err){
-                res.status(500).json(err);
-            }else{
-                res.status(200).json(product)
-            }
-        })
-    }catch(err){
-        res.status(500).json(err)
+    if(publicIds){
+        const body = {
+            images: publicIds,
+            title,
+            ...others
+        } 
+        // // add the new product to the db
+        const newProduct = await new Product(body)
+     
+        try{
+           await newProduct.save((err, product)=>{
+                if(err){
+                    handleProductError(err, res)
+                }else{
+                    res.status(200).json(product)
+                }
+            })
+        }catch(err){
+            handleProductError(err, res)
+        }
     }
-
-
 })
 
 
@@ -78,11 +75,14 @@ router.get("/", async(req, res)=>{
     try{
         const recentProducts = req.query.new
         const qCategory = req.query.category;
+        const featured = req.query.isFeatured;
         let products;
         if(recentProducts){
              products = await Product.find().sort({createdAt: -1}).limit(5)
         }else if(qCategory){
              products = await Product.find({categories: {$in: [qCategory]}})
+        }else if(featured){
+             products = await Product.find({isFeatured: true}).limit(8)
         }else{
           products = await Product.find().populate('categories');
         }
@@ -92,6 +92,7 @@ router.get("/", async(req, res)=>{
     }
 
 });
+
 
 
 

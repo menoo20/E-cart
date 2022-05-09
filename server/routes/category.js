@@ -66,7 +66,6 @@ router.get("/", async(req, res)=>{
         }
       
         const categories = await Category.find();
-        console.log(categories);
         res.status(200).json(categories)
     }catch(err){
         res.json("something wrond happend")

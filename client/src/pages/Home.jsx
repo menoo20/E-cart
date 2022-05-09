@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Announcement from '../components/Announcement'
 import ProductsList from '../components/ProductsList'
 import Navbar from '../components/Navbar'
@@ -9,7 +9,15 @@ import AdsBanner from '../components/AdsBanner'
 import Footer from '../components/Footer'
 import { connect } from 'react-redux'
 import GoToTop from '../customHooks/GoToTop'
-const Home = () => {
+import { getFeaturedProducts } from '../Redux/actions/productsAction'
+
+const Home = ({getFeaturedProducts , featuredProducts}) => {
+
+
+  useEffect(()=>{
+    getFeaturedProducts()
+   console.log("you launched use effect");
+  }, [])
 
   return (
     <div>
@@ -19,7 +27,7 @@ const Home = () => {
       <div className="container-lg p-0 overflow-hidden">
         <ShopNow/>
         <CategoriesPromoGrid/>
-        <ProductsList name={"Featured Products"}/>
+        <ProductsList products={featuredProducts} name={"Featured Products"}/>
         <AdsBanner/>
       </div>
       <GoToTop/>
@@ -28,10 +36,11 @@ const Home = () => {
   )
 }
 
-const mapStateToProps = ({user})=>{
+const mapStateToProps = ({user, products})=>{
    return{
-     user
+     user,
+     featuredProducts: products.featuredProducts,
    }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, {getFeaturedProducts})(Home)

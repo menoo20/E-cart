@@ -1,5 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getCategories } from '../Redux/actions/categoryAction'
+
 
 const Button = styled.button`
 &:focus{
@@ -18,8 +22,14 @@ const Span = styled.span`
  }
 `
 
-const NavSearchInput = () => {
+const NavSearchInput = ({getCategories, categories}) => {
 const [categoryName, setCategoryName] = useState("Category")
+
+
+useEffect(()=>{
+  getCategories()
+  console.log("i launched once");
+}, [])
 
 const handleClick = (e)=>{
     let categoryName = e.target.getAttribute("value");
@@ -31,10 +41,16 @@ const handleClick = (e)=>{
         <div className="input-group">
             <Button className="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">{categoryName==="All"? "Category": categoryName}</Button>
             <ul className="dropdown-menu " onClick={e => handleClick(e)}>
-                {categoryName === "All" || categoryName === "Category" ? "" :<li><a className="dropdown-item" href="#" value="All" >All</a></li>}
-                <li><a className="dropdown-item" href="#" value="Vegetables" >Vegetables</a></li>
-                <li><a className="dropdown-item" href="#" value="Fruits">Fruits</a></li>
-                <li><a className="dropdown-item" href="#" value="Bread">Bread</a></li>
+            {categoryName === "All" || categoryName === "Category" ? "" :<li><Link className="dropdown-item" to="#" value="All" >All</Link></li>}
+                {categories.map(category=>{
+                  return (
+                    <li key={category.name}>
+                      <Link className="dropdown-item" to="#" value={category.name} >
+                        {category.name}
+                      </Link>
+                    </li>
+                  )
+                })}
             </ul>
             <Input type="text" className="form-control " 
             aria-label="Text input with dropdown button"
@@ -49,4 +65,10 @@ const handleClick = (e)=>{
   )
 }
 
-export default NavSearchInput
+function mapStateToProps ({categories}){
+  return{
+    categories: categories.categories
+  }
+}
+
+export default connect(mapStateToProps, {getCategories})(NavSearchInput)

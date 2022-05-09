@@ -4,6 +4,8 @@
    
     .card {
         border: 1px solid #eee;
+        height: 100%;
+        justify-content: space-between;
         cursor: pointer;
         i{
             font-size: 1.2rem;

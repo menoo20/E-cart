@@ -1,6 +1,9 @@
 
 
-const initialValue = null
+const initialValue = {
+    categories: [],
+    featuredCategories: []
+}
 
 
 const categoryReducer = (state=initialValue, action)=>{
@@ -8,7 +11,20 @@ const categoryReducer = (state=initialValue, action)=>{
     switch (action.type) {
     case "GET_FEATURED":
     
-    return action.payload
+    return {
+        ...state,
+        featuredCategories : [
+            ...action.payload
+        ]
+    }
+    
+    case "GET_ALL_CATS":
+    return {
+        ...state,
+        categories : [
+            ...action.payload
+        ]
+    }
  
     default:
         return state

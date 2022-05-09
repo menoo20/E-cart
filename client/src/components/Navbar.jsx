@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavSearchInput from './NavSearchInput';
 import SearchByCat from './SearchByCat';
@@ -7,6 +7,11 @@ import { connect } from 'react-redux';
 import UserDropdown from './UserDropdown';
 
 const Navbar = ({user}) => {
+
+
+
+
+
   return (
     <nav className="navbar navbar-expand-lg newNav">
       <div className="container-fluid container-xxl align-items-center">

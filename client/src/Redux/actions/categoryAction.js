@@ -8,9 +8,16 @@ export const getCategories = () => async dispatch =>{
 
     category.get("/")
     .then(response =>{
-        console.log(response.data)
+        dispatch(getAllCategories(response.data))
     })
 
+}
+
+const getAllCategories = (categories)=>{
+    return{
+        type: "GET_ALL_CATS",
+        payload: categories
+    }
 }
 
 

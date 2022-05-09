@@ -22,9 +22,13 @@
         }
      }
     }
+    .navbar-nav .dropdown-menu{
+        position: absolute !important;
+    }
     .dropdown-menu{
         a{
             color: black !important;
+
         }
             li{
                 & a:hover{

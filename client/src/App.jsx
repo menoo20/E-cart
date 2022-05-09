@@ -76,4 +76,5 @@ const mapStateToProps = ({user, categories})=>{
    }
 }
 
+
 export default connect(mapStateToProps, {getFeaturedCat})(App); ;
