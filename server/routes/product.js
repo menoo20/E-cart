@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const {verifyTokenAndAuthorize, verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
+const {verifyTokenAndAdmin} = require("../middlewares/authorizeToken");
+const  resultPaginated  = require("../middlewares/pagination");
 const Product = require("../models/Product");
 const uploadedImgs = require("../utils/multipleImageUpload");
 const handleProductError = require("../utils/productErrors");
@@ -71,26 +72,28 @@ router.get("/find/:id", async(req, res)=>{
     }
 })
 
-router.get("/", async(req, res)=>{
-    try{
-        const recentProducts = req.query.new
-        const qCategory = req.query.category;
-        const featured = req.query.isFeatured;
-        let products;
-        if(recentProducts){
-             products = await Product.find().sort({createdAt: -1}).limit(5)
-        }else if(qCategory){
-             products = await Product.find({categories: {$in: [qCategory]}})
-        }else if(featured){
-             products = await Product.find({isFeatured: true}).limit(8)
-        }else{
-          products = await Product.find().populate('categories');
-        }
-        res.status(200).json(products)
-    }catch(err){
-        res.json("something wrond happend")
-    }
-
+router.get("/",resultPaginated(Product), async(req, res)=>{
+ 
+    // try{
+    //     const newest = req.query.new
+    //     const category = req.query.category;
+    //     const featured = req.query.isFeatured;
+    //     let products;
+    //     if(recentProducts){
+    //          products = await Product.find().sort({createdAt: -1})
+    //     }else if(qCategory){
+    //          products = await Product.find({categories: {$in: [qCategory]}})
+    //     }else if(featured){
+    //          products = await Product.find({isFeatured: true}).limit(8)
+    //     }else{
+    //       products = await Product.find().populate('categories');
+    //     }
+    //     res.status(200).json({products})
+    // }catch(err){
+    //     res.json("something wrond happend")
+    // }
+    // console.log(res.results)
+    res.json(res.results)
 });
 
 

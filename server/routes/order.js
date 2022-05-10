@@ -51,7 +51,7 @@ router.get("/find/:userId", async(req, res)=>{
     const userId = req.params.userId;
     try{
         const orders = await Order.find({userId})
-        return res.status(200).json(order) 
+        return res.status(200).json(orders) 
     }catch(err){
         res.status(500).json("something wrond happend")
     }

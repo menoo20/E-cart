@@ -12,8 +12,6 @@ const reviewsRoute = require("./routes/review")
 const cookieParser = require("cookie-parser");
 
 
-
-
 dotenv.config();
 const cors = require("cors");
 const Category = require("./models/Category");
@@ -36,6 +34,7 @@ app.use("/api/order", orderRoute)
 app.use("/api/category", categoriesRoute)
 app.use("/api/reviews", reviewsRoute)
 app.use(cookieParser())
+
 
 
 app.listen(process.env.PORT||5000, _=> console.log("backend server is running on port: "+ process.env.PORT))

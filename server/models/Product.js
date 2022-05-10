@@ -26,4 +26,6 @@ ProductSchema.pre("remove", async function (next) {
     justOne: false,
   });
 
+
+
 module.exports = mongoose.model("Product", ProductSchema)
