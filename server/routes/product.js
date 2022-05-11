@@ -74,26 +74,13 @@ router.get("/find/:id", async(req, res)=>{
 
 router.get("/",resultPaginated(Product), async(req, res)=>{
  
-    // try{
-    //     const newest = req.query.new
-    //     const category = req.query.category;
-    //     const featured = req.query.isFeatured;
-    //     let products;
-    //     if(recentProducts){
-    //          products = await Product.find().sort({createdAt: -1})
-    //     }else if(qCategory){
-    //          products = await Product.find({categories: {$in: [qCategory]}})
-    //     }else if(featured){
-    //          products = await Product.find({isFeatured: true}).limit(8)
-    //     }else{
-    //       products = await Product.find().populate('categories');
-    //     }
-    //     res.status(200).json({products})
-    // }catch(err){
-    //     res.json("something wrond happend")
-    // }
-    // console.log(res.results)
-    res.json(res.results)
+    try{
+       res.status(200).json(res.results)
+
+      
+    }catch(err){
+        res.json("something wrond happend")
+    }
 });
 
 

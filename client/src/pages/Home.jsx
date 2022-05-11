@@ -27,7 +27,11 @@ const Home = ({getFeaturedProducts , featuredProducts}) => {
       <div className="container-lg p-0 overflow-hidden">
         <ShopNow/>
         <CategoriesPromoGrid/>
+        {featuredProducts?
         <ProductsList products={featuredProducts} name={"Featured Products"}/>
+        :
+        ""
+        }
         <AdsBanner/>
       </div>
       <GoToTop/>
@@ -37,6 +41,7 @@ const Home = ({getFeaturedProducts , featuredProducts}) => {
 }
 
 const mapStateToProps = ({user, products})=>{
+  console.log(products)
    return{
      user,
      featuredProducts: products.featuredProducts,

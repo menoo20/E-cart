@@ -5,13 +5,13 @@
         return new ObjectId(this.toString());
       };
     // Every String can be casted in ObjectId now
+
     return async (req,res, next)=>{
-    // const newest = req.query.newest? req.query.newest: null
-    // const category = req.query.category? req.query.category: null
-    // const featured = req.query.isFeatured? req.query.isFeatured: null
-    // const highestPrice = req.query.highestPrice? req.query.highestPrice: null
+    //define the page and limit of items searched
     const page = req.query.page? parseInt(req.query.page) : 1
-    const limit = req.query.limit? parseInt(req.query.limit): 4
+    const limit = req.query.limit? parseInt(req.query.limit): 8
+    console.log(req.query)
+    //make a sort and filter object to add to my found search results
     const  sort={};
     const  filter = {};
   
@@ -20,6 +20,9 @@
     }
     if(req.query.category){
         filter.category = {"categories": { $in: {_id: req.query.category.toObjectId()}}}
+    }
+    if(req.query.price){
+        filter.price = {price: {$lte: "7", $gte: "3"}}
     }
     if(req.query.newest){
         sort.createdAt = -1 
@@ -31,6 +34,7 @@
         filter.isFeatured = {"isFeatured": true}
     }
       const results = {};
+
     try{
 
       let startIndex = (page-1) * limit;
@@ -40,9 +44,10 @@
       if(startIndex > 0){
           results.previousPage = page - 1;
       }
-
-       if(req.query.category){
-        const paginatedData = await model.find(filter.category? filter.category: {}, async(err, data)=>{
+       //search and sort adding the category filter
+       if(req.query.category || req.query.price){
+           console.log({...filter.category, ...filter.price})
+        const paginatedData = await model.find({...filter.category, ...filter.price}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;
                 results.totalPages = Math.ceil( (results.totalDocuments) / limit)
@@ -56,11 +61,15 @@
         
         res.results =  results;
         next()
-       }else if(req.query.isFeatured){
+       }
+       //get the featured products to add to the homepage
+       else if(req.query.isFeatured){
            const data = await model.find({isFeatured: true}).limit(8)
-           res.results =  results;
+           res.results =  data;
            next()
-       }else{
+       }
+       //get all products products and the sorting as much as i like
+       else{
         const paginatedData = await model.find({}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;

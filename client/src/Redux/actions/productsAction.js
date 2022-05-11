@@ -3,19 +3,25 @@ import { featuredProducts, products } from "../Axios/product";
 
 
 
-export const getProducts = () => async dispatch =>{
-
-    products.get("/")
+export const getProducts = (category, sort, price) => async dispatch =>{
+ 
+    products.get("/", {
+        params: {
+            category: category? category._id: "",
+            [sort] : sort? sort: "",
+            price: price? {lte: price.lte, gte: price.gte } : ""
+        },
+     })
     .then(response =>{
         dispatch(getAllProducts(response.data))
     })
 
 }
 
-export const getAllProducts = (products)=>{
+export const getAllProducts = (results)=>{
     return{
         type: "GET_ALL_PRODUCTS",
-        payload: products
+        payload: results
     }
 }
 

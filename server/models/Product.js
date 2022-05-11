@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
     unit: {
      type: String, required: [true, "please add a unit to your product"],
-     enum: ['kilo', 'litre', 'packet', 'sachet', 'carton', 'bag', 'bar', 'package']
+     enum: ['kilo', 'litre', 'packet', 'sachet', 'carton', 'bag', 'bar', 'package', "jar"]
     },
     isFeatured: {type: Boolean, default: true},
     price: {type: Number, required: true},

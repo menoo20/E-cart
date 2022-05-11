@@ -2,7 +2,12 @@
 
 const initialValue = {
     categories: [],
-    featuredCategories: []
+    featuredCategories: [],
+    category: {
+        id: "",
+        name:""
+    },
+    sort: {}
 }
 
 
@@ -24,6 +29,19 @@ const categoryReducer = (state=initialValue, action)=>{
         categories : [
             ...action.payload
         ]
+    }
+
+    case "CHOOSEN_CAT":
+        console.log(action.payload)
+    return {
+        ...state,
+        category : action.payload
+    }
+
+    case "CHOOSE_SORT":
+    return {
+        ...state,
+        sort: action.payload
     }
  
     default:

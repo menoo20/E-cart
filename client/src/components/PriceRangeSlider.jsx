@@ -8,12 +8,12 @@ const marks = [
       label: '0$',
     },
     {
-      value: 250,
-      label: '250$',
+      value: 50,
+      label: '50$',
     },
     {
-      value: 500,
-      label: '500$',
+      value: 100,
+      label: '100$',
     },
   ];
 
@@ -41,7 +41,7 @@ const PriceRangeSlider = () => {
         getAriaValueText={valuetext}
         marks={marks}
         min={0}
-        max={500}
+        max={100}
         sx={{
             color: '#8bd122',
             marginBottom: '0px',

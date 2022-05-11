@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { connect } from 'react-redux'
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
+import {getProducts, chooseCat} from "../Redux/actions"
 
 
 const Button = styled.button`
@@ -18,13 +19,27 @@ const Input = styled.input`
  }
 `
 
-const SearchByCat = ({categories}) => {
-    const [categoryName, setCategoryName] = useState("Category")
+const SearchByCat = ({categories, getProducts, chooseCat, category, sort}) => {
+    const [categoryName, setCategoryName] = useState("Category");
+
+    useEffect(()=>{
+      if(category.name)
+      setCategoryName(category.name)
+    })
 
     const handleClick = (e)=>{
       let categoryName = e.target.getAttribute("value");
+      
       setCategoryName(categoryName);
-   
+      if(categoryName == "All"){
+        getProducts()
+        chooseCat("")
+      }
+   }
+
+   const handleCategory = (e, category)=>{
+      getProducts(category, sort.query).then(_=> chooseCat(category))
+      
    }
   return (
     <div className="input-group mb-3">
@@ -34,7 +49,7 @@ const SearchByCat = ({categories}) => {
             {categories.map(category=> {
               return (
                 <li key={category.name}>
-                  <Link className="dropdown-item" to="#" value={category.name}>
+                  <Link className="dropdown-item" to="#" value={category.name} onClick={(e) =>handleCategory(e, category)}>
                   {category.name}
                   </Link>
                 </li>
@@ -49,9 +64,12 @@ const SearchByCat = ({categories}) => {
 }
 
 const mapStateToProps = ({categories}) => {
+  console.log(categories)
   return {
-    categories: categories.categories
+    categories: categories.categories,
+    category: categories.category,
+    sort: categories.sort
   }
 }
 
-export default connect(mapStateToProps)(SearchByCat) 
+export default connect(mapStateToProps, {getProducts, chooseCat})(SearchByCat) 

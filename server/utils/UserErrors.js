@@ -23,7 +23,7 @@ const handleError = (error, res, )=> {
     }
 
     //Duplicate Errors
-    if(error.code == 11000){
+    if(error.code === 11000){
       console.log(error)
       SchemaErrors[Object.keys(error.keyPattern)[0]] = `This is a duplicate ${Object.keys(error.keyPattern)[0]}. please enter a new one`
       return res.status(500).json(SchemaErrors);

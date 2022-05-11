@@ -15,7 +15,6 @@ const placeholderImg = 'https://res.cloudinary.com/e-cart2022/image/upload/v1651
 
 const NormalImg = ({normalImg}) => {
   // Create and configure my Cloudinary instance.
-  console.log(normalImg)
 
   const cld = new Cloudinary({
     cloud: {
@@ -30,7 +29,7 @@ const NormalImg = ({normalImg}) => {
     myImage?
     (
         myImage
-    .resize(fill())
+    .resize(fill().height(250))
     // .width(40).height(40).gravity(focusOn(FocusOn.face())))
     )
     :
@@ -40,7 +39,6 @@ const NormalImg = ({normalImg}) => {
     if(myImage == 0) {
     //   return <img src={placeholderImg} alt="placeholder image"  width={40}/>
     }else{
-        console.log(myImage)
       return <AdvancedImage cldImg={myImage} className="img-fluid" alt="NormalImg" /> 
     }
   }

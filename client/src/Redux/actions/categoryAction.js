@@ -29,6 +29,7 @@ const getFeatured = (categories)=>{
 }
 
 
+
 export const getFeaturedCat = () => async dispatch =>{
 
     featuredCategory.get("/")
@@ -36,4 +37,19 @@ export const getFeaturedCat = () => async dispatch =>{
         dispatch(getFeatured(response.data))
     })
 
+}
+
+
+export const chooseCat = (category)=>{
+    return {
+        type: "CHOOSEN_CAT",
+        payload: category
+    }
+}
+
+export const chooseSort = (sort)=>{
+    return {
+        type: "CHOOSE_SORT",
+        payload: sort
+    }
 }

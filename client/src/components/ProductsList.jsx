@@ -11,7 +11,7 @@ const ProductsList = ({name, products}) => {
             <h1 className='py-4 text-center  cart-title'>
                {name}
             </h1>
-            <div className="row g-1 justify-content-between">
+            <div className="row g-1 justify-content-start">
               {products.map(product=>{
                 return (
                   <ProductCard 
@@ -24,48 +24,7 @@ const ProductsList = ({name, products}) => {
                   categories={product.categories}/>
                 )
               })
-
               }
-                {/* <ProductCard 
-                  name="Red Redish"
-                  price={"7.00"}
-                  quantity={1}
-                  thumb="https://i.imgur.com/w2rCsEw.jpg"/>
-                <ProductCard 
-                  name="Red Redish"
-                  price={"7.00"}
-                  quantity={1}
-                  thumb="https://i.imgur.com/ZRUetRF.jpg"/>
-                <ProductCard 
-                    name="Red Redish"
-                    price={"7.00"}
-                    quantity={1}
-                    thumb="https://i.imgur.com/0M7pldG.jpg"/>
-                <ProductCard 
-                    name="Red Redish"
-                    price={"7.00"}
-                    quantity={1}
-                    thumb="https://i.imgur.com/emb60L5.jpg"/>
-                     <ProductCard 
-                  name="Red Redish"
-                  price={"7.00"}
-                  quantity={1}
-                  thumb="https://i.imgur.com/w2rCsEw.jpg"/>
-                <ProductCard 
-                  name="Red Redish"
-                  price={"7.00"}
-                  quantity={1}
-                  thumb="https://i.imgur.com/ZRUetRF.jpg"/>
-                <ProductCard 
-                    name="Red Redish"
-                    price={"7.00"}
-                    quantity={1}
-                    thumb="https://i.imgur.com/0M7pldG.jpg"/>
-                <ProductCard 
-                    name="Red Redish"
-                    price={"7.00"}
-                    quantity={1}
-                    thumb="https://i.imgur.com/emb60L5.jpg"/> */}
                 </div>
         </div>
   )
