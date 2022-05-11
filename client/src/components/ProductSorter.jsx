@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { connect } from 'react-redux';
 import {getProducts, chooseSort} from "../Redux/actions"
 
- function ProductSorter({getProducts, category, chooseSort, sorter}) {
+ function ProductSorter({getProducts, category, chooseSort, sorter, price}) {
 
   const [sort, setSort] = useState('Most Popular');
 
@@ -22,9 +22,9 @@ import {getProducts, chooseSort} from "../Redux/actions"
   };
 
   const handleClick = (e) => {
-    console.log(e.currentTarget.dataset)
     const sort = e.currentTarget.dataset
-    getProducts(category, sort.query).then(_=>{
+    
+    getProducts(category, sort.query, price).then(_=>{
       chooseSort({value: sort.value, query: sort.query});
     });
 
@@ -61,7 +61,8 @@ import {getProducts, chooseSort} from "../Redux/actions"
 const mapStateToProps =  ({categories})=>{
     return{
       category: categories.category,
-      sorter: categories.sort
+      sorter:  categories.sort? categories.sort : "" ,
+      price: categories.price
     }
 }
 

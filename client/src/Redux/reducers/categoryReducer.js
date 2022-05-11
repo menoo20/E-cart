@@ -1,5 +1,4 @@
 
-
 const initialValue = {
     categories: [],
     featuredCategories: [],
@@ -7,7 +6,8 @@ const initialValue = {
         id: "",
         name:""
     },
-    sort: {}
+    sort: {},
+    price: {lte: "", gte: ""}
 }
 
 
@@ -43,6 +43,11 @@ const categoryReducer = (state=initialValue, action)=>{
         ...state,
         sort: action.payload
     }
+    case "CHOOSE_PRICE_RANGE":
+    return {
+        ...state,
+        price: action.payload
+    } 
  
     default:
         return state

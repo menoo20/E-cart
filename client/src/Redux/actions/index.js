@@ -1,5 +1,5 @@
 import { RegReq } from "./AuthActions";
-import {getCategories, getFeaturedCat, chooseCat, chooseSort} from "./categoryAction"
+import {getCategories, getFeaturedCat, chooseCat, chooseSort, choosePriceRange} from "./categoryAction"
 import {getProducts, getFeaturedProducts} from "./productsAction"
 
 export  {
@@ -9,6 +9,7 @@ export  {
     getProducts,
     getFeaturedProducts,
     chooseCat,
-    chooseSort
+    chooseSort,
+    choosePriceRange
 }
     

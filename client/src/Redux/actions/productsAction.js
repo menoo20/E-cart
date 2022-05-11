@@ -4,15 +4,17 @@ import { featuredProducts, products } from "../Axios/product";
 
 
 export const getProducts = (category, sort, price) => async dispatch =>{
- 
+    console.log(price)
     products.get("/", {
         params: {
             category: category? category._id: "",
             [sort] : sort? sort: "",
-            price: price? {lte: price.lte, gte: price.gte } : ""
+            lte: price? price.lte : "",
+            gte: price? price.gte : ""
         },
      })
     .then(response =>{
+        console.log(response.date)
         dispatch(getAllProducts(response.data))
     })
 

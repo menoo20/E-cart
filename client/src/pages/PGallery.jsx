@@ -11,11 +11,11 @@ import Footer from '../components/Footer'
 import { connect } from 'react-redux'
 import {getProducts} from '../Redux/actions'
 
-const PGallery = ({products, getAll, getProducts, category, sort}) => {
+const PGallery = ({products, getAll, getProducts, category, sort, price}) => {
   const [cat, setCat] = useState("All")
 
  useEffect(()=>{
-   getProducts(category, sort.query)
+   getProducts(category, sort.query, price)
    console.log("am trying to get all products")
  },[])
 
@@ -54,7 +54,8 @@ function mapStateToProps({products, categories}){
     totalDocuments: products.totalDocuments,
     totalPages: products.totalPages,
     category: categories.category,
-    sort: categories.sort
+    sort: categories.sort,
+    price: categories.price
   }
 }
 

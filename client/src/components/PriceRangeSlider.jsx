@@ -1,6 +1,8 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import {connect} from "react-redux";
+import { getProducts, choosePriceRange } from '../Redux/actions';
 
 const marks = [
     {
@@ -18,8 +20,30 @@ const marks = [
   ];
 
 
-const PriceRangeSlider = () => {
-    const [value, setValue] = React.useState([0, 500]);
+const PriceRangeSlider = ({choosePriceRange, getProducts, category, sort, price}) => {
+    const [value, setValue] = React.useState([0, 100]);
+    const [debouncedValue, setDebounce] = useState({});
+
+    useEffect(()=>{
+      const timedChange = setTimeout(()=>{
+        if(value != [0,100]){
+          setDebounce({lte: value[0], gte: value[1]})
+        }
+
+      }, 300)
+      return  ()=> clearTimeout(timedChange)
+    }, [value])
+
+    useEffect(()=>{
+        if(debouncedValue){
+          
+          getProducts(category, sort.query, debouncedValue);
+          choosePriceRange(debouncedValue)
+        }
+  }, [debouncedValue])
+
+
+
     function valuetext(value) {
         return `${value}$`;
       }
@@ -57,4 +81,13 @@ const PriceRangeSlider = () => {
   );
 }
 
-export default PriceRangeSlider
+const mapStateToProps = ({categories})=>{
+return{
+  category: categories.category,
+  sort:  categories.sort,
+  price: categories.price
+}
+
+}
+
+export default connect(mapStateToProps, {getProducts, choosePriceRange})(PriceRangeSlider)

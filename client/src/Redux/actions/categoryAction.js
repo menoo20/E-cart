@@ -53,3 +53,10 @@ export const chooseSort = (sort)=>{
         payload: sort
     }
 }
+
+export const choosePriceRange = (price)=>{
+    return {
+        type: "CHOOSE_PRICE_RANGE",
+        payload: price
+    }
+}

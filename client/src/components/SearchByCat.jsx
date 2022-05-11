@@ -19,7 +19,7 @@ const Input = styled.input`
  }
 `
 
-const SearchByCat = ({categories, getProducts, chooseCat, category, sort}) => {
+const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price}) => {
     const [categoryName, setCategoryName] = useState("Category");
 
     useEffect(()=>{
@@ -27,18 +27,20 @@ const SearchByCat = ({categories, getProducts, chooseCat, category, sort}) => {
       setCategoryName(category.name)
     })
 
-    const handleClick = (e)=>{
+    const handleClick = async(e)=>{
       let categoryName = e.target.getAttribute("value");
-      
-      setCategoryName(categoryName);
-      if(categoryName == "All"){
-        getProducts()
+      if(categoryName == "All" || categoryName == "Category"){
+        console.log(price);
+        await getProducts(sort.query, price)
         chooseCat("")
       }
+      
+      setCategoryName(categoryName);
+
    }
 
    const handleCategory = (e, category)=>{
-      getProducts(category, sort.query).then(_=> chooseCat(category))
+      getProducts(category, sort.query, price).then(_=> chooseCat(category))
       
    }
   return (
@@ -64,11 +66,11 @@ const SearchByCat = ({categories, getProducts, chooseCat, category, sort}) => {
 }
 
 const mapStateToProps = ({categories}) => {
-  console.log(categories)
   return {
     categories: categories.categories,
     category: categories.category,
-    sort: categories.sort
+    sort: categories.sort,
+    price: categories.price
   }
 }
 

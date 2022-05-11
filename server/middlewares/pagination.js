@@ -21,8 +21,11 @@
     if(req.query.category){
         filter.category = {"categories": { $in: {_id: req.query.category.toObjectId()}}}
     }
-    if(req.query.price){
-        filter.price = {price: {$lte: "7", $gte: "3"}}
+    if(req.query.lte || req.query.gte){
+        //mathematical error so i had to reverse the options ...sorry for that
+        const lte = req.query.gte? req.query.gte : "100";
+        const gte = req.query.lte? req.query.lte : "0";
+        filter.price = {price: {$lte: lte, $gte: gte}}
     }
     if(req.query.newest){
         sort.createdAt = -1 
@@ -45,8 +48,7 @@
           results.previousPage = page - 1;
       }
        //search and sort adding the category filter
-       if(req.query.category || req.query.price){
-           console.log({...filter.category, ...filter.price})
+       if(req.query.category || req.query.lte){
         const paginatedData = await model.find({...filter.category, ...filter.price}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;
