@@ -10,23 +10,23 @@ const marks = [
       label: '0$',
     },
     {
-      value: 50,
-      label: '50$',
+      value: 25,
+      label: '25$',
     },
     {
-      value: 100,
-      label: '100$',
+      value: 50,
+      label: '50$',
     },
   ];
 
 
 const PriceRangeSlider = ({choosePriceRange, getProducts, category, sort, price}) => {
-    const [value, setValue] = React.useState([0, 100]);
+    const [value, setValue] = React.useState([0, 50]);
     const [debouncedValue, setDebounce] = useState({});
 
     useEffect(()=>{
       const timedChange = setTimeout(()=>{
-        if(value != [0,100]){
+        if(value != [0,50]){
           setDebounce({lte: value[0], gte: value[1]})
         }
 
@@ -65,7 +65,7 @@ const PriceRangeSlider = ({choosePriceRange, getProducts, category, sort, price}
         getAriaValueText={valuetext}
         marks={marks}
         min={0}
-        max={100}
+        max={50}
         sx={{
             color: '#8bd122',
             marginBottom: '0px',

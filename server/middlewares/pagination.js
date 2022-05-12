@@ -10,7 +10,6 @@
     //define the page and limit of items searched
     const page = req.query.page? parseInt(req.query.page) : 1
     const limit = req.query.limit? parseInt(req.query.limit): 8
-    console.log(req.query)
     //make a sort and filter object to add to my found search results
     const  sort={};
     const  filter = {};
@@ -23,7 +22,7 @@
     }
     if(req.query.lte || req.query.gte){
         //mathematical error so i had to reverse the options ...sorry for that
-        const lte = req.query.gte? req.query.gte : "100";
+        const lte = req.query.gte? req.query.gte : "50";
         const gte = req.query.lte? req.query.lte : "0";
         filter.price = {price: {$lte: lte, $gte: gte}}
     }
@@ -37,7 +36,7 @@
         filter.isFeatured = {"isFeatured": true}
     }
       const results = {};
-
+      
     try{
 
       let startIndex = (page-1) * limit;
@@ -48,7 +47,7 @@
           results.previousPage = page - 1;
       }
        //search and sort adding the category filter
-       if(req.query.category || req.query.lte){
+       if(req.query.category || req.query.lte || !req.query.category){
         const paginatedData = await model.find({...filter.category, ...filter.price}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;
@@ -58,7 +57,7 @@
                     }
             }
           
-        }).clone().sort(sort? sort: "").limit(limit).skip(startIndex).exec();
+        }).clone().sort(sort? sort: "").limit(limit).skip(startIndex);
         results.results = paginatedData;
         
         res.results =  results;
@@ -70,24 +69,6 @@
            res.results =  data;
            next()
        }
-       //get all products products and the sorting as much as i like
-       else{
-        const paginatedData = await model.find({}, async(err, data)=>{
-            if(data.length){
-                results.totalDocuments = await data.length;
-                results.totalPages = Math.ceil( (results.totalDocuments) / limit)
-                if(endIndex <  data.length){
-                    results.nextPage = page +1;
-                    }
-            }
-          
-        }).clone().sort(sort? sort: "").limit(limit).skip(startIndex).exec();
-        results.results = paginatedData;
-        
-        res.results =  results;
-        next()
-       }
-           
       }catch(e){
           res.status(500).json(e.message)
       }

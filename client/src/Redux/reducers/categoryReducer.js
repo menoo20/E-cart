@@ -6,8 +6,10 @@ const initialValue = {
         id: "",
         name:""
     },
-    sort: {},
-    price: {lte: "", gte: ""}
+    sort: "Most Popular",
+    price: {lte: 0, gte: 50},
+    page: 1,
+    limit: 6
 }
 
 
@@ -32,7 +34,6 @@ const categoryReducer = (state=initialValue, action)=>{
     }
 
     case "CHOOSEN_CAT":
-        console.log(action.payload)
     return {
         ...state,
         category : action.payload
@@ -48,6 +49,12 @@ const categoryReducer = (state=initialValue, action)=>{
         ...state,
         price: action.payload
     } 
+
+    case "CHOOSE_PAGE_OR_LIMIT":
+    return {
+        ...state,
+        ...action.payload
+    }
  
     default:
         return state

@@ -19,20 +19,19 @@ const Input = styled.input`
  }
 `
 
-const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price}) => {
-    const [categoryName, setCategoryName] = useState("Category");
+const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price, page, limit}) => {
+    const [categoryName, setCategoryName] = useState(category.name? category.name: "Category");
 
     useEffect(()=>{
       if(category.name)
       setCategoryName(category.name)
     })
 
-    const handleClick = async(e)=>{
+    const handleClick = (e)=>{
       let categoryName = e.target.getAttribute("value");
       if(categoryName == "All" || categoryName == "Category"){
-        console.log(price);
-        await getProducts(sort.query, price)
         chooseCat("")
+        getProducts("", sort.query, price, page, limit)
       }
       
       setCategoryName(categoryName);
@@ -40,7 +39,7 @@ const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price}
    }
 
    const handleCategory = (e, category)=>{
-      getProducts(category, sort.query, price).then(_=> chooseCat(category))
+      getProducts(category, sort.query, price, page, limit).then(_=> chooseCat(category))
       
    }
   return (
@@ -70,7 +69,9 @@ const mapStateToProps = ({categories}) => {
     categories: categories.categories,
     category: categories.category,
     sort: categories.sort,
-    price: categories.price
+    price: categories.price,
+    page: categories.page,
+    limit: categories.limit
   }
 }
 

@@ -60,3 +60,13 @@ export const choosePriceRange = (price)=>{
         payload: price
     }
 }
+
+export const choosePageAndLimit = (page, limit)=>{
+    return {
+        type: "CHOOSE_PAGE_OR_LIMIT",
+        payload: {
+            page,
+            limit
+        }
+    }
+}

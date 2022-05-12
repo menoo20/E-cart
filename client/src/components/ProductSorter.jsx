@@ -9,23 +9,18 @@ import {getProducts, chooseSort} from "../Redux/actions"
 
  function ProductSorter({getProducts, category, chooseSort, sorter, price}) {
 
-  const [sort, setSort] = useState('Most Popular');
+  const [sort, setSort] = useState(sorter.value? sorter.value : "Most Popular");
 
-  // set the sort on refresh
-  useEffect(()=>{
-    if(sorter)
-    setSort(sorter.value)
-  })
 
   const handleChange = (event) => {
     setSort(event.target.value);
   };
 
   const handleClick = (e) => {
-    const sort = e.currentTarget.dataset
+    const sorting = e.currentTarget.dataset
     
-    getProducts(category, sort.query, price).then(_=>{
-      chooseSort({value: sort.value, query: sort.query});
+    getProducts(category, sorting.query, price).then(_=>{
+      chooseSort({value: sorting.value, query: sorting.query});
     });
 
   }
@@ -61,7 +56,7 @@ import {getProducts, chooseSort} from "../Redux/actions"
 const mapStateToProps =  ({categories})=>{
     return{
       category: categories.category,
-      sorter:  categories.sort? categories.sort : "" ,
+      sorter:  categories.sort? categories.sort : "Most Popular" ,
       price: categories.price
     }
 }

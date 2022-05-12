@@ -1,9 +1,9 @@
 
 const initialValue = {
-    totalPages: null,
-    totalDocuments: null,
-    nextPage: null,
-    previousPage: null,
+    totalPages: "",
+    totalDocuments: "",
+    nextPage: "",
+    previousPage: "",
     products: [],
     featuredProducts: []
 }
