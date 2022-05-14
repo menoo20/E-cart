@@ -1,10 +1,10 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
@@ -16,7 +16,7 @@ const resetPass = require("./routes/reset-password");
 const brandRoute = require("./routes/brand");
 const categoryRoute = require("./routes/category");
 
-const cors = require("cors");
+
 
 // connect to DB
 mongoose

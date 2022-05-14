@@ -1,21 +1,43 @@
 const router = require("express").Router();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
+const Product = require("../models/Product");
 
-router.post("/payment", (req, res) => {
-  stripe.charges.create(
+
+router.post("/payment", async (req, res) => {
+  try {
+    // fetch projects using there id
+    let productsList = [];
+    
+    for(let element of req.body.items)
     {
-      source: req.body.tokenId,
-      amount: req.body.amount,
-      currency: "usd",
-    },
-    (stripeErr, stripeRes) => {
-      if (stripeErr) {
-        res.status(500).json(stripeErr);
-      } else {
-        res.status(200).json(stripeRes);
-      }
+      let product = await Product.findOne({_id: element.id});
+      productsList.push({obj: product, quantity:element.quantity})
     }
-  );
-});
+    
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: productsList.map(item => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.obj.title,
+            },
+            unit_amount: (parseInt(item.obj.price) *100),
+          },
+          quantity: parseInt(item.quantity),
+        }
+      }),
+      success_url: `${process.env.BASE_URL}/`,
+      cancel_url: `${process.env.BASE_URL}/cancel`,
+    })
+    res.json({ url: session.url })
+  } catch (e) {
+    //console.error(e);
+    res.status(500).json({ error: e.message })
+  }
+})
 
 module.exports = router;
