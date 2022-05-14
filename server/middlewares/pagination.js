@@ -5,7 +5,6 @@
         return new ObjectId(this.toString());
       };
     // Every String can be casted in ObjectId now
-
     return async (req,res, next)=>{
     //define the page and limit of items searched
     const page = req.query.page? parseInt(req.query.page) : 1
@@ -13,7 +12,7 @@
     //make a sort and filter object to add to my found search results
     const  sort={};
     const  filter = {};
-  
+
     if(req.query.highestPrice){
         sort.price = -1
     }
@@ -47,7 +46,7 @@
           results.previousPage = page - 1;
       }
        //search and sort adding the category filter
-       if(req.query.category || req.query.lte || !req.query.category){
+       if(req.query.category || req.query.lte){
         const paginatedData = await model.find({...filter.category, ...filter.price}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;
@@ -65,8 +64,10 @@
        }
        //get the featured products to add to the homepage
        else if(req.query.isFeatured){
+           console.log(req.query.isFeatured)
            const data = await model.find({isFeatured: true}).limit(8)
            res.results =  data;
+           console.log(data)
            next()
        }
       }catch(e){

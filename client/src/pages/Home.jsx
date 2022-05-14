@@ -14,8 +14,8 @@ import { getFeaturedProducts } from '../Redux/actions/productsAction'
 const Home = ({getFeaturedProducts , featuredProducts}) => {
 
 
-  useEffect(()=>{
-    getFeaturedProducts()
+  useEffect(async()=>{
+   await getFeaturedProducts()
    console.log("you launched use effect");
   }, [])
 
@@ -28,7 +28,7 @@ const Home = ({getFeaturedProducts , featuredProducts}) => {
         <ShopNow/>
         <CategoriesPromoGrid/>
         {featuredProducts?
-        <ProductsList products={featuredProducts} name={"Featured Products"}/>
+        <ProductsList products={featuredProducts? featuredProducts : ""} name={"Featured Products"}/>
         :
         ""
         }
@@ -44,7 +44,7 @@ const mapStateToProps = ({user, products})=>{
   console.log(products)
    return{
      user,
-     featuredProducts: products.featuredProducts,
+     featuredProducts: products.featuredProducts? products.featuredProducts : "",
    }
 }
 

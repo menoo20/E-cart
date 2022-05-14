@@ -6,9 +6,6 @@ export const products = axios.create({
 
   export const featuredProducts = axios.create({
     baseURL: "http://localhost:8000/api/products/",
-    params: {isFeatured : true},
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    params: {isFeatured : true}
   });
 
