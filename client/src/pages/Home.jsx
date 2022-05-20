@@ -10,12 +10,18 @@ import Footer from '../components/Footer'
 import { connect } from 'react-redux'
 import GoToTop from '../customHooks/GoToTop'
 import { getFeaturedProducts } from '../Redux/actions/productsAction'
+import { getFeaturedCat } from '../Redux/actions'
 
-const Home = ({getFeaturedProducts , featuredProducts}) => {
 
+const Home = ({getFeaturedCat, featuredCategories, getFeaturedProducts , featuredProducts}) => {
 
   useEffect(async()=>{
-   await getFeaturedProducts()
+    "did you start me ?"
+   await getFeaturedCat();
+ },[])
+
+  useEffect(async()=>{
+   await getFeaturedProducts(true)
    console.log("you launched use effect");
   }, [])
 
@@ -26,7 +32,13 @@ const Home = ({getFeaturedProducts , featuredProducts}) => {
       <Slider/>
       <div className="container-lg p-0 overflow-hidden">
         <ShopNow/>
-        <CategoriesPromoGrid/>
+        {
+          featuredCategories?
+          <CategoriesPromoGrid featuredCategories={featuredCategories? featuredCategories : ""}/>
+          :
+          ""
+        }
+        
         {featuredProducts?
         <ProductsList products={featuredProducts? featuredProducts : ""} name={"Featured Products"}/>
         :
@@ -40,12 +52,13 @@ const Home = ({getFeaturedProducts , featuredProducts}) => {
   )
 }
 
-const mapStateToProps = ({user, products})=>{
-  console.log(products)
+const mapStateToProps = ({user, products, categories})=>{
+  console.log(categories)
    return{
+     featuredCategories: categories.featuredCategories.length? categories.featuredCategories : "",
      user,
      featuredProducts: products.featuredProducts? products.featuredProducts : "",
    }
 }
 
-export default connect(mapStateToProps, {getFeaturedProducts})(Home)
+export default connect(mapStateToProps, {getFeaturedCat, getFeaturedProducts})(Home)

@@ -8,12 +8,13 @@ import {thumbnail, fill} from "@cloudinary/url-gen/actions/resize";
 // Import required qualifiers.
 import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
 import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
+import { auto } from '@cloudinary/url-gen/qualifiers/quality';
 
 const placeholderImg = 'https://res.cloudinary.com/e-cart2022/image/upload/v1651376145/static%20files/user_placeholder.png'
 
 
 
-const Thumb = ({thumb, handleBigImage}) => {
+const Normal2 = ({normalImg}) => {
   // Create and configure my Cloudinary instance.
 
   const cld = new Cloudinary({
@@ -23,12 +24,13 @@ const Thumb = ({thumb, handleBigImage}) => {
   }); 
 
   // Use the image with public ID, 'front_face'.
-  const myImage = thumb? cld.image(thumb):"";
-
+  const myImage = normalImg? cld.image(normalImg):"";
     // Apply the transformation.
     myImage?
-    (myImage
+    (
+        myImage
     .resize(fill())
+    // .width(40).height(40).gravity(focusOn(FocusOn.face())))
     )
     :
     ""
@@ -37,7 +39,7 @@ const Thumb = ({thumb, handleBigImage}) => {
     if(myImage == 0) {
     //   return <img src={placeholderImg} alt="placeholder image"  width={40}/>
     }else{
-      return <AdvancedImage cldImg={myImage} className="img-fluid rounded" alt="thumb"  /> 
+      return <AdvancedImage cldImg={myImage} className="img-fluid" alt="NormalImg" /> 
     }
   }
 
@@ -46,4 +48,4 @@ const Thumb = ({thumb, handleBigImage}) => {
   )
 }
 
-export default Thumb
+export default Normal2

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CartIcon } from './CartIcon';
 import NormalImg from './CloudinaryImg/NormalImg';
-
-const ProductCard = ({normalImg, price, name, quantity, unit}) => {
+import { Link } from 'react-router-dom';
+const ProductCard = ({normalImg, price, name, quantity, unit, id}) => {
   const [clicked, setClicked] = useState(false)
   const [disabled, setDisabled] = useState(false)
   
@@ -31,9 +31,11 @@ const ProductCard = ({normalImg, price, name, quantity, unit}) => {
   return (
     <div className="col-md-4 col-lg-3 ">
       <div className="card p-4 pb-2">
-          <div className="text-center">
-              <NormalImg normalImg={normalImg[0]} width="200"/>
-         </div>
+          <Link to={`/product/${id}`}>
+            <div className="text-center">
+                <NormalImg normalImg={normalImg[0]} width="200"/>
+            </div>
+          </Link>  
    
           <div className="product-details"> <span className="font-weight-bold d-block">$ {price}</span> <span>{name}</span>
               <div className="buttons d-flex flex-row">

@@ -5,7 +5,7 @@ import ProductCard from './ProductCard'
 
 
 const ProductsList = ({name, products}) => {
-    
+    console.log(products)
     return (
         <div className="wrapper mb-5">
             <h1 className='py-4 text-center  cart-title'>
@@ -16,6 +16,7 @@ const ProductsList = ({name, products}) => {
                 return (
                   <ProductCard 
                   key={product._id}
+                  id={product._id}
                   name= {product.title}
                   price={product.price}
                   quantity={1}

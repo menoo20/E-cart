@@ -21,6 +21,8 @@ const Input = styled.input`
 
 const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price, page, limit}) => {
     const [categoryName, setCategoryName] = useState(category.name? category.name: "Category");
+    const [productName, setName] = useState("")
+    
 
     useEffect(()=>{
       if(category.name)
@@ -31,15 +33,21 @@ const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price,
       let categoryName = e.target.getAttribute("value");
       if(categoryName == "All" || categoryName == "Category"){
         chooseCat("")
-        getProducts("", sort.query, price, page, limit)
+        getProducts("", sort.query, price, page, limit, productName)
       }
       
       setCategoryName(categoryName);
 
    }
 
+   const handleProductSearch =(e, productName) =>{
+     e.preventDefault()
+     console.log(productName);
+        getProducts(category, sort.query, price, page, limit, productName).then(_=> chooseCat(category))
+   }
+
    const handleCategory = (e, category)=>{
-      getProducts(category, sort.query, price, page, limit).then(_=> chooseCat(category))
+      getProducts(category, sort.query, price, page, limit, productName).then(_=> chooseCat(category))
       
    }
   return (
@@ -59,7 +67,11 @@ const SearchByCat = ({categories, getProducts, chooseCat, category, sort, price,
         </ul>
         <Input type="text" className="form-control py-2" 
         aria-label="Text input with dropdown button"
-        placeholder='Product name'></Input>
+        onChange={e => setName(e.target.value)}
+        placeholder='Product name' ></Input>
+        <button className='btn btn-primary rounded-end input-group-text' type='submit' onClick={(e)=>handleProductSearch(e,productName)}>
+                    <i className='bi bi-search'></i>
+        </button>
     </div>
   )
 }

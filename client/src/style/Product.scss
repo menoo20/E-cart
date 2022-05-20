@@ -56,6 +56,7 @@ $badge-padding-x:.66em;
         .product-images{
             img{
                 border-radius:.625rem;
+                max-height: 300px;
                 cursor: pointer;
                 @include for-size(mobile-to-tablet){
                  border-radius:0;
@@ -112,6 +113,10 @@ $badge-padding-x:.66em;
         
             .product-thumbnails{
                 margin-top: 1.875rem;
+                // height: 300px;
+                .parent{
+                    width: 100%;
+                }
                 @include for-size(lg-to-xl-desktops){
                     margin-top: 1rem;
                 }
@@ -127,13 +132,12 @@ $badge-padding-x:.66em;
                             left: 0;
                             width: 100%;
                             height: 100%;
-                            border-radius:.625rem;
                             background-color: $White;
                             opacity: 0;
                             transition: all .3s ease-in-out;
                         }
                         &.active::after, &:hover:after{
-                            opacity: 0.5;
+                            opacity: 0.3;
                             transition: all .3s ease-in-out;
                         }
                         &.active img{

@@ -28,8 +28,9 @@ const App = (props) => {
   },[display])
 
   //get featured products
-  useEffect(()=>{
-     props.getFeaturedCat();
+  useEffect(async()=>{
+    console.log("i tried to fetch categories")
+    await props.getFeaturedCat();
   },[])
 
   const user = props.user
@@ -69,10 +70,10 @@ return(
 };
 
 
-const mapStateToProps = ({user, categories})=>{
+const mapStateToProps = ({user})=>{
    return{
-     user,
-     categories
+     user
+     
    }
 }
 

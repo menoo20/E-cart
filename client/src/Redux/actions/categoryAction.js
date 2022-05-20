@@ -31,7 +31,7 @@ const getFeatured = (categories)=>{
 
 
 export const getFeaturedCat = () => async dispatch =>{
-
+    console.log("started fetching cat")
     featuredCategory.get("/")
     .then(response =>{
         dispatch(getFeatured(response.data))

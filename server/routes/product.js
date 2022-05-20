@@ -72,8 +72,9 @@ router.get("/find/:id", async(req, res)=>{
     }
 })
 
-router.get("/",resultPaginated(Product), async(req, res)=>{
- 
+router.get("/", resultPaginated(Product), async(req, res)=>{
+    // 
+    
     try{
        res.status(200).json(res.results)
 

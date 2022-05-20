@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import "../style/CategoriesPromoGrid.scss"
 import ShopnowBtn from './styledComponents/ShopnowBtn'
 import { Link } from 'react-router-dom'
 
+const CategoriesPromoGrid = ({featuredCategories  }) => {
 
-const CategoriesPromoGrid = ({featuredCategories}) => {
+
   
   return (
     <>
@@ -16,19 +17,19 @@ const CategoriesPromoGrid = ({featuredCategories}) => {
          
           <div className="col-12 col-md-6 text-center category p-0">
             <div className="overlay d-flex flex-column justify-content-center align-items-center">
-              <h1><span>FRESH</span><br/>{featuredCategories[1].name.toUpperCase()}</h1>
+              <h1><span>FRESH</span><br/>{featuredCategories? featuredCategories[1].name.toUpperCase(): ""}</h1>
               <ShopnowBtn color="btn-primary">Shop Now</ShopnowBtn>
             </div>
           </div>
           <div className="col-12 col-md-6 text-center category p-0">
             <div className="overlay d-flex flex-column justify-content-center align-items-center">
-              <h1><span>FRESH</span><br/>{featuredCategories[2].name.toUpperCase()}</h1>
+              <h1><span>FRESH</span><br/>{featuredCategories? featuredCategories[2].name.toUpperCase(): ""}</h1>
               <ShopnowBtn color="btn-primary">Shop Now</ShopnowBtn>
             </div>
           </div>
           <div className="col-12 col-md-12 text-center category p-0">
             <div className="overlay d-flex justify-content-center flex-column align-items-center">
-                <h1><span>FRESH</span><br/>{featuredCategories[0].name.toUpperCase()}</h1>
+                <h1><span>FRESH</span><br/>{featuredCategories? featuredCategories[0].name.toUpperCase(): ""}</h1>
                 <ShopnowBtn color="btn-primary">Shop Now</ShopnowBtn>
             </div>
           </div>
@@ -38,8 +39,9 @@ const CategoriesPromoGrid = ({featuredCategories}) => {
 }
 
 function mapStateToProps({categories}){
+  console.log(categories.featuredCategories)
   return{
-    featuredCategories: categories.featuredCategories
+    featuredCategories: categories.featuredCategories? categories.featuredCategories : ""
   }
 
 }

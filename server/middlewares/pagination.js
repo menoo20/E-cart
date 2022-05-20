@@ -6,29 +6,38 @@
       };
     // Every String can be casted in ObjectId now
     return async (req,res, next)=>{
+    
     //define the page and limit of items searched
     const page = req.query.page? parseInt(req.query.page) : 1
     const limit = req.query.limit? parseInt(req.query.limit): 8
     //make a sort and filter object to add to my found search results
     const  sort={};
     const  filter = {};
-
     if(req.query.highestPrice){
+   
+
         sort.price = -1
     }
     if(req.query.category){
+     
         filter.category = {"categories": { $in: {_id: req.query.category.toObjectId()}}}
     }
+    if(req.query.keyword){
+      filter.keyword = req.query.keyword? { "title": {$regex: new RegExp(req.query.keyword, 'i')}}: {};
+    }
     if(req.query.lte || req.query.gte){
+        
         //mathematical error so i had to reverse the options ...sorry for that
         const lte = req.query.gte? req.query.gte : "50";
         const gte = req.query.lte? req.query.lte : "0";
         filter.price = {price: {$lte: lte, $gte: gte}}
     }
     if(req.query.newest){
+       
         sort.createdAt = -1 
     }
     if(req.query.oldest){
+        
         sort.createdAt = 1
     }
     if(req.query.isFeatured){
@@ -47,7 +56,7 @@
       }
        //search and sort adding the category filter
        if(req.query.category || req.query.lte){
-        const paginatedData = await model.find({...filter.category, ...filter.price}, async(err, data)=>{
+        const paginatedData = await model.find({...filter.category, ...filter.price, ...filter.keyword}, async(err, data)=>{
             if(data.length){
                 results.totalDocuments = await data.length;
                 results.totalPages = Math.ceil( (results.totalDocuments) / limit)
@@ -64,11 +73,27 @@
        }
        //get the featured products to add to the homepage
        else if(req.query.isFeatured){
-           console.log(req.query.isFeatured)
-           const data = await model.find({isFeatured: true}).limit(8)
+           const data = await model.find({...filter.isFeatured}).limit(8)
            res.results =  data;
            console.log(data)
            next()
+       }
+       //get products with the existence of a keyword
+       else if(req.query.keyword){
+        const paginatedData = await model.find({...filter.category, ...filter.price, ...filter.keyword}, async(err, data)=>{
+            if(data.length){
+                results.totalDocuments = await data.length;
+                results.totalPages = Math.ceil( (results.totalDocuments) / limit)
+                if(endIndex <  data.length){
+                    results.nextPage = page +1;
+                    }
+            }
+          
+        }).clone().sort(sort? sort: "").limit(limit).skip(startIndex);
+        results.results = paginatedData;
+        
+        res.results =  results;
+        next()
        }
       }catch(e){
           res.status(500).json(e.message)

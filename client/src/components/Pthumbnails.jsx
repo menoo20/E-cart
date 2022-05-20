@@ -1,11 +1,12 @@
 import React from 'react'
+import Thumb from './CloudinaryImg/Thumb'
 
-const Pthumbnails = ({img, active}) => {
+const Pthumbnails = ({img, col, handleBigImage}) => {
   return (
-    <div className="col-3 product-thumbnail">
+    <div className={`col-${col<7?col: 4} product-thumbnail`}>
         <a className="btn border-0 p-0"  >
             <div  className="img-cover thumb" > 
-                <img src={img} alt="product-1-thumb" className="img-fluid "></img>
+                <Thumb thumb={img} alt="product-1-thumb" className="img-fluid " ></Thumb>
             </div>
         </a>
     </div>
