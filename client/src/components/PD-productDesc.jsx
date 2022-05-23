@@ -33,8 +33,11 @@ const PDproductDesc = ({id, product, category}) => {
 }
 
 const mapStateToProps = ({products, categories}, {id})=>{
-  const product =  products.products? products.products.filter(product => product._id == id): ""
-  const category = categories.categories? categories.categories.filter(category => category._id == product[0].categories[0]): "";
+  console.log(products);
+  const product =  products.products.length > 1? 
+  products.products.filter(product => product._id == id):
+  products.featuredProducts.filter(product => product._id == id);
+  const category = categories.categories.length? categories.categories.filter(category => category._id == product[0].categories[0]): "";
   return{
     product: product[0],
     category: category[0].name

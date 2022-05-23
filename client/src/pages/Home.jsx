@@ -15,10 +15,10 @@ import { getFeaturedCat } from '../Redux/actions'
 
 const Home = ({getFeaturedCat, featuredCategories, getFeaturedProducts , featuredProducts}) => {
 
-  useEffect(async()=>{
-    "did you start me ?"
-   await getFeaturedCat();
- },[])
+//   useEffect(async()=>{
+//     "did you start me ?"
+//    await getFeaturedCat();
+//  },[])
 
   useEffect(async()=>{
    await getFeaturedProducts(true)
@@ -53,7 +53,6 @@ const Home = ({getFeaturedCat, featuredCategories, getFeaturedProducts , feature
 }
 
 const mapStateToProps = ({user, products, categories})=>{
-  console.log(categories)
    return{
      featuredCategories: categories.featuredCategories.length? categories.featuredCategories : "",
      user,

@@ -62,11 +62,12 @@ const PDproductImgs = ({product, images}) => {
 }
 
 const mapStateToProps = ({products}, {id})=>{
-  const product =  products.products? products.products.filter(product => product._id == id): "";
-  const images = product[0].images;
-  console.log(images);
+  const product =  products.products.length > 1? 
+  products.products.filter(product => product._id == id):
+  products.featuredProducts.filter(product => product._id == id);
+  const images = product.length? product[0].images  : "";
   return{
-    product: product[0],
+    product: product? product[0] : "",
     images: images? images: ""
   }
 }

@@ -10,7 +10,7 @@ import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
-import  {getFeaturedCat} from "./Redux/actions";
+import  {getFeaturedCat, getCategories} from "./Redux/actions";
 
 
 const App = (props) => {
@@ -31,6 +31,8 @@ const App = (props) => {
   useEffect(async()=>{
     console.log("i tried to fetch categories")
     await props.getFeaturedCat();
+    await props.getCategories();
+    // await getFeaturedProducts(true)
   },[])
 
   const user = props.user
@@ -78,4 +80,4 @@ const mapStateToProps = ({user})=>{
 }
 
 
-export default connect(mapStateToProps, {getFeaturedCat})(App); ;
+export default connect(mapStateToProps, {getFeaturedCat, getCategories})(App); ;

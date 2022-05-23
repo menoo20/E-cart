@@ -44,7 +44,7 @@ const handleClick = (e)=>{
             {categoryName === "All" || categoryName === "Category" ? "" :<li><Link className="dropdown-item" to="#" value="All" >All</Link></li>}
                 {categories.map(category=>{
                   return (
-                    <li key={category.name}>
+                    <li key={category._id}>
                       <Link className="dropdown-item" to="#" value={category.name} >
                         {category.name}
                       </Link>

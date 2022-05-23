@@ -39,7 +39,6 @@ const CategoriesPromoGrid = ({featuredCategories  }) => {
 }
 
 function mapStateToProps({categories}){
-  console.log(categories.featuredCategories)
   return{
     featuredCategories: categories.featuredCategories? categories.featuredCategories : ""
   }
