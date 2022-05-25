@@ -19,7 +19,7 @@ const Home = ({featuredCategories, getFeaturedProducts , getProducts, products, 
     "did you start me ?"
     await chooseCat("")
     await getProducts(category, sort.query, price, page, 8, "", true)
- },)
+ },[])
 
   useEffect(async()=>{
    rerenderme(!rerender)
@@ -64,7 +64,7 @@ const mapStateToProps = ({user, products, categories})=>{
      sort: categories.sort,
      price: categories.price,
      page: categories.page,
-     limit: categories.limit
+     limit: categories.limit,
    }
 }
 

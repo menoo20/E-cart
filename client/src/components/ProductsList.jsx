@@ -14,14 +14,15 @@ const ProductsList = ({name, products}) => {
               {products.map(product=>{
                 return (
                   <ProductCard 
+                  product={product}
                   key={product._id}
                   id={product._id}
                   name= {product.title}
                   price={product.price}
-                  quantity={1}
                   unit={product.unit}
                   normalImg={product.images}
-                  categories={product.categories}/>
+                  categories={product.categories}
+                  />
                 )
               })
               }
@@ -29,6 +30,8 @@ const ProductsList = ({name, products}) => {
         </div>
   )
 }
+
+
 
 export default ProductsList
 

@@ -35,7 +35,7 @@ const PGallery = ({products, getAll, getProducts, category, sort, price, page, l
             <ProductSorter/>
         </div>  
     </div>
-    <div className="container">
+    <div className="container-lg">
       <div className="row justify-content-around align-items-center">
         
           <ProductsList products={products} name={"Our Products"}/>

@@ -53,7 +53,7 @@ const SaleDiscount = ()=>{
      <h2 className='text-primary my-3'>Order Total</h2>
      <PriceItem priceKind="TOTAL" price="125"/>
      <div className='d-grid'>
-        <button className='btn btn-warning' disabled={disabled?"true": "false"}>Place Your Order</button>
+        <button className='btn btn-warning' disabled={disabled?true: false}>Place Your Order</button>
     </div>
     </div>
   )

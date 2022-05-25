@@ -46,7 +46,7 @@ return(
     {/* here is the toast container for react toastify */}
     <ToastContainer
       position="top-right"
-      autoClose={3000}
+      autoClose={2000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick

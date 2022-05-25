@@ -8,10 +8,6 @@ import UserDropdown from './UserDropdown';
 
 const Navbar = ({user}) => {
 
-
-
-
-
   return (
     <nav className="navbar navbar-expand-lg newNav">
       <div className="container-fluid container-xxl align-items-center">

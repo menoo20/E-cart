@@ -18,10 +18,19 @@ $badge-padding-x:.66em;
 
 .cart{
 
+    h1 {
+        font-size: 46px;
+        color: #8bd122;
+        span{
+            font-family: 'Lilita One', cursive;
+            color: black;
+        }
+    }
     .quant{
         background-color: $green;
         border-radius:10px;
         padding: .1rem !important;
+
     
         p{
             font-weight: 700;

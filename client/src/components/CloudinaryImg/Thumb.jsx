@@ -13,7 +13,7 @@ const placeholderImg = 'https://res.cloudinary.com/e-cart2022/image/upload/v1651
 
 
 
-const Thumb = ({thumb, handleBigImage}) => {
+const Thumb = ({thumb}) => {
   // Create and configure my Cloudinary instance.
 
   const cld = new Cloudinary({
