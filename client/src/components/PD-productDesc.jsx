@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { category } from '../Redux/Axios/category'
 import AddToCartBtn from './AddToCartBtn'
 import QuantityChanger from './QuantityChanger'
 

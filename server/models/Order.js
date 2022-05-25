@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema({
     userId: {type: String, required: true},
+    address: {type: Object, required: true},
+    cost: {type: Number, required: true},
+    status: {type: String,
+             default: "pending",
+             enum: ['pending', 'shipped', 'cancelled', 'finsihed']},
     products: [
         {
             productId:{
@@ -13,9 +18,7 @@ const OrderSchema = new mongoose.Schema({
             }
         }
     ],
-    amount: {type: Number, required: true},
-    address: {type: Object, required: true},
-    status: {type: String, default: "pending"}
+
 }, {timestamps: true})
 
 

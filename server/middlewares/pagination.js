@@ -75,7 +75,6 @@
        else if(req.query.isFeatured){
            const data = await model.find({...filter.isFeatured}).limit(8)
            res.results =  data;
-           console.log(data)
            next()
        }
        //get products with the existence of a keyword

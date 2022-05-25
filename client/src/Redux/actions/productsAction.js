@@ -3,7 +3,7 @@ import { featuredProducts, products } from "../Axios/product";
 
 
 
-export const getProducts = (category, sort, price, page, limit, productName) => async dispatch =>{
+export const getProducts = (category, sort, price, page, limit, productName, isFeatured) => async dispatch =>{
     products.get("/", {
         params: {
             category: category? category._id: "",
@@ -12,7 +12,8 @@ export const getProducts = (category, sort, price, page, limit, productName) => 
             gte: price? price.gte : "0",
             page: page? page: 1,
             limit: limit? limit : 6,
-            keyword: productName? productName : ""
+            keyword: productName? productName : "",
+            isFeatured: isFeatured
         },
      })
     .then(response =>{

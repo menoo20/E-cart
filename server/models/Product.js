@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema({
      enum: ['kilo', 'litre', 'packet', 'sachet', 'carton', 'bag', 'bar', 'package', "jar"]
     },
     isFeatured: {type: Boolean, default: true},
+    amountInStock: {type: Number, required: [true, "please enter the amount in stock"]},
     price: {type: Number, required: true},
 },{timestamps: true})
 

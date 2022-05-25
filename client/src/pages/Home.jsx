@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Announcement from '../components/Announcement'
 import ProductsList from '../components/ProductsList'
 import Navbar from '../components/Navbar'
@@ -9,20 +9,23 @@ import AdsBanner from '../components/AdsBanner'
 import Footer from '../components/Footer'
 import { connect } from 'react-redux'
 import GoToTop from '../customHooks/GoToTop'
-import { getFeaturedProducts } from '../Redux/actions/productsAction'
-import { getFeaturedCat } from '../Redux/actions'
+import { getFeaturedProducts, getProducts } from '../Redux/actions/productsAction'
+import { getFeaturedCat, chooseCat } from '../Redux/actions'
 
 
-const Home = ({getFeaturedCat, featuredCategories, getFeaturedProducts , featuredProducts}) => {
-
-//   useEffect(async()=>{
-//     "did you start me ?"
-//    await getFeaturedCat();
-//  },[])
+const Home = ({featuredCategories, getFeaturedProducts , getProducts, products, chooseCat, category, sort, price, page, limit}) => {
+     const [rerender, rerenderme] = useState(true)
+  useEffect(async()=>{
+    "did you start me ?"
+    await chooseCat("")
+    await getProducts(category, sort.query, price, page, 8, "", true)
+ },)
 
   useEffect(async()=>{
-   await getFeaturedProducts(true)
-   console.log("you launched use effect");
+   rerenderme(!rerender)
+
+  //  await getFeaturedProducts(true)
+   console.log("i rerenderd home");
   }, [])
 
   return (
@@ -39,8 +42,8 @@ const Home = ({getFeaturedCat, featuredCategories, getFeaturedProducts , feature
           ""
         }
         
-        {featuredProducts?
-        <ProductsList products={featuredProducts? featuredProducts : ""} name={"Featured Products"}/>
+        {products?
+        <ProductsList products={products? products : ""} name={"Featured Products"}/>
         :
         ""
         }
@@ -56,8 +59,13 @@ const mapStateToProps = ({user, products, categories})=>{
    return{
      featuredCategories: categories.featuredCategories.length? categories.featuredCategories : "",
      user,
-     featuredProducts: products.featuredProducts? products.featuredProducts : "",
+     products: products.products? products.products : "",
+     category: categories.category,
+     sort: categories.sort,
+     price: categories.price,
+     page: categories.page,
+     limit: categories.limit
    }
 }
 
-export default connect(mapStateToProps, {getFeaturedCat, getFeaturedProducts})(Home)
+export default connect(mapStateToProps, {getFeaturedCat, getProducts, getFeaturedProducts, chooseCat})(Home)
